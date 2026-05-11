@@ -85,6 +85,10 @@ class Agent:
         for step in self.graph.stream(
             {"messages": [{"role": "user", "content": human_message}]},
             stream_mode="values",
-            config={"configurable": {"thread_id": "abc123"}, "recursion_limit": 5}
+            config={"configurable": {"thread_id": "abc123"}}
         ):
             step["messages"][-1].pretty_print()
+
+    
+    def visualize(self):
+        self.graph.get_graph().draw_mermaid_png(output_file_path="workflow.png")

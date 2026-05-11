@@ -4,7 +4,12 @@ An experimental LLM Agent framework built with LangChain for scalable, reliable,
 
 # 📌 Overview
 
-Lizard is a testing agent framework designed to explore agentic system design patterns, including tool orchestration, memory management, and multi-agent collaboration.
+Lizard is a testing agent framework designed to explore agentic system design patterns, including tool orchestration, memory management, and multi-agent collaboration. The visualization of its workflow is shown below (you also can use ```func visualize()``` to plot it):
+
+<p align="center">
+    <img src="workflow.png" alt="workflow" width="200"><br>
+    Workflow of <b>Lizard</b>
+</p>
 
 <!-- The system focuses on building production-relevant capabilities such as:
 
@@ -16,10 +21,11 @@ Lizard is a testing agent framework designed to explore agentic system design pa
 
 # 🛠 To-Do
 
-- **Vector-based Memory** with ```chroma```
+- **Vector-based Memory** with ```FAISS```
 - **Thread Conversion Management** with ```thread_id```
 - **Cross-tool Output Verfication** to improve reliability
 - **Multi-Agent Coordination**
+- **Scheme Visualization** -> DONE
 
 # 🎯 Purpose
 

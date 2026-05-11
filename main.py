@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(dotenv_path="../.env") # Remove this when git push
 
 import os
 # 1. Silence the 'absl' logging warning
@@ -31,7 +31,7 @@ TOOLBOX = [
     fetch_existing_data
 ]
 
-LLM = setup_model(HUGGINGFACE)
+LLM = setup_model(GEMINI)
 
 SYS_PROMT = """
     You are a helpful assistant tasked with answering questions using a set of tools. When given a question, follow these steps:
@@ -55,6 +55,7 @@ SYS_PROMT = """
 """
 
 agent = Agent(llm=LLM, tools=TOOLBOX, sys_prompt=SYS_PROMT)
+agent.visualize()
 
 # Specify an ID for the thread
 config = {"configurable": {"thread_id": "abc123"}}

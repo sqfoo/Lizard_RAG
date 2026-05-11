@@ -68,11 +68,25 @@ class Database:
             self: the Database instance, no need to pass when calling
             query: query string
         """
-        retrieved_docs = self.vector_store.similarity_search(query, k=2)
-        serialized = "\n\n".join(
-            (f"Source: {doc.metadata}\nContent: {doc.page_content}")
-            for doc in retrieved_docs
+
+        selection_prompt = ChatPromptTemplate.from_template(
+            "Read this query: {query}, then decide whether is 'SUMMARY' or 'RETRIEVER', just output either 'SUMMARY' or 'RETRIEVER'"
         )
+        select_chain = selection_prompt | self.summary_llm
+        result = select_chain.invoke({"query": query}).content
+        
+        if result == 'SUMMARY':
+            prompt = ChatPromptTemplate.from_template("{query}: {text}")
+            text = "\n\n".join(self.docs.values())
+            summarized_chain = prompt | self.summary_llm
+            serialized = summarized_chain.invoke({"query": query, "text": text}).content
+            retrieved_docs = []
+        else:
+            retrieved_docs = self.vector_store.similarity_search(query, k=5)
+            serialized = "\n\n".join(
+                (f"Source: {doc.metadata}\nContent: {doc.page_content}")
+                for doc in retrieved_docs
+            )
         time.sleep(TIME_TO_SLEEP)
         return serialized, retrieved_docs
 
