@@ -1,4 +1,8 @@
 from dotenv import load_dotenv
+import time
+from datetime import datetime
+
+
 load_dotenv(dotenv_path="../.env") # Remove this when git push
 
 import os
@@ -12,7 +16,6 @@ os.environ['GRPC_VERBOSITY'] = 'ERROR'
 os.environ['GLOG_minloglevel'] = '2'
 
 from agent import Agent
-from llm import HUGGINGFACE, GEMINI, setup_model
 from tools import *
 from database import database
 
@@ -31,7 +34,6 @@ TOOLBOX = [
     fetch_existing_data
 ]
 
-LLM = setup_model(GEMINI)
 
 SYS_PROMT = """
     You are a helpful assistant tasked with answering questions using a set of tools. When given a question, follow these steps:
@@ -54,7 +56,7 @@ SYS_PROMT = """
     And also suggests three possible follow-up steps to the current task by starting with: "SUGGESTION: ".
 """
 
-agent = Agent(llm=LLM, tools=TOOLBOX, sys_prompt=SYS_PROMT)
+agent = Agent(tools=TOOLBOX, sys_prompt=SYS_PROMT)
 agent.visualize()
 
 # Specify an ID for the thread
@@ -72,8 +74,23 @@ while keep:
 print("\n>>>>>----------------------<<<<<\n")
 chat_history = agent.graph.get_state(config).values["messages"]
 
-with open('ctx.txt', 'w') as f:
+with open('ctx.txt', 'a') as f:
+    # 1. Get the current epoch timestamp (float)
+    timestamp = time.time()
+
+    # 2. Convert to a readable string (e.g., "2026-06-02 21:33:58")
+    readable_time = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+
+    # 3. Encode it to UTF-8 bytes
+    utf8_time = readable_time.encode('utf-8')
+    f.write(f'Chat saved at {utf8_time}')
+    print('Saving the chat content')
     for message in chat_history:
-        message.pretty_print()
+        # Determine the sender type (HumanMessage, AIMessage, SystemMessage)
+        sender = message.__class__.__name__.replace("Message", "")
+        
+        # Write to the file
+        f.write(f"=== {sender} ===\n")
+        f.write(f"{message.content}\n\n")
 
 database.save()

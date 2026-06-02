@@ -5,6 +5,21 @@ from langchain_core.messages import AnyMessage, SystemMessage
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.memory import MemorySaver
+from google.api_core.exceptions import ResourceExhausted, GoogleAPIError, Forbidden, FailedPrecondition, BadRequest
+
+from llm import GEMINI, HUGGINGFACE, setup_model
+from utils import FallbackLoggingHandler
+
+# ResourceExhausted handles the 429 Rate Limit error.
+# GoogleAPIError handles general 5xx/server/network drops.
+GEMINI_ERRORS = (
+    ResourceExhausted,
+    GoogleAPIError,
+    Forbidden,
+    FailedPrecondition,
+    ValueError,
+    Exception
+)
 
 class AgentState(TypedDict):
     """Agent state for the graph."""
@@ -12,8 +27,16 @@ class AgentState(TypedDict):
     messages: Annotated[list[AnyMessage], add_messages]
 
 class Agent:
-    def __init__(self, llm, tools, sys_prompt):
-        self.llm = llm
+    def __init__(self, tools, sys_prompt):
+        primary_llm = setup_model(GEMINI, callbacks=[FallbackLoggingHandler()])
+        backup_llm = setup_model(HUGGINGFACE)
+        
+        resilient_model = primary_llm.with_fallbacks(
+            fallbacks=[backup_llm],
+            # exceptions_to_handle=GEMINI_ERRORS
+        )
+
+        self.llm = resilient_model
         self.tools = ToolNode(tools)
         self.llm_with_tools = self.llm.bind_tools(tools)
         self.sys_prompt = sys_prompt
