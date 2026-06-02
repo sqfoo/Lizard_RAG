@@ -26,6 +26,8 @@ Lizard is a testing agent framework designed to explore agentic system design pa
 - **Cross-tool Output Verfication** to improve reliability
 - **Multi-Agent Coordination**
 - **Scheme Visualization** -> DONE
+- **Primary LLM with Backup LLM** -> DONE
+- **Agent return Response, instead print out something**  [Important]
 
 # 🎯 Purpose
 
