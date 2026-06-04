@@ -51,16 +51,13 @@ SYS_PROMT = """
     - A comma-separated list (apply the formatting rules above for each element, with exactly one space after each comma).
 
     Ensure that your answer is concise and follows the task instructions strictly. If the answer is more complex, break it down in a way that follows the format.
-    Begin your response with "FINAL ANSWER: " followed by the answer, and nothing else.
+    And also suggests three possible follow-up steps to the current task if the task is open.
 
-    And also suggests three possible follow-up steps to the current task by starting with: "SUGGESTION: ".
+    Always wrap your final answer in the exact JSON format: {"FINAL ANSWER": "YOUR WORD", "SUGGESTION": "YOUR SUGGESTION"}
 """
 
 agent = Agent(tools=TOOLBOX, sys_prompt=SYS_PROMT)
 agent.visualize()
-
-# Specify an ID for the thread
-config = {"configurable": {"thread_id": "abc123"}}
 
 keep = True
 while keep:
@@ -72,7 +69,8 @@ while keep:
     print('=================================')
 
 print("\n>>>>>----------------------<<<<<\n")
-chat_history = agent.graph.get_state(config).values["messages"]
+
+chat_history = agent.get_chat_history()
 
 with open('ctx.txt', 'a') as f:
     # 1. Get the current epoch timestamp (float)
@@ -81,9 +79,7 @@ with open('ctx.txt', 'a') as f:
     # 2. Convert to a readable string (e.g., "2026-06-02 21:33:58")
     readable_time = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
-    # 3. Encode it to UTF-8 bytes
-    utf8_time = readable_time.encode('utf-8')
-    f.write(f'Chat saved at {utf8_time}')
+    f.write(f'Chat saved at {readable_time}\n')
     print('Saving the chat content')
     for message in chat_history:
         # Determine the sender type (HumanMessage, AIMessage, SystemMessage)

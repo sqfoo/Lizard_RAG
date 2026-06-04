@@ -1,3 +1,7 @@
+import re
+import time
+import uuid
+import json
 from typing import TypedDict, Annotated, Optional
 
 from langgraph.graph import END, StateGraph, START
@@ -5,21 +9,13 @@ from langchain_core.messages import AnyMessage, SystemMessage
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.memory import MemorySaver
-from google.api_core.exceptions import ResourceExhausted, GoogleAPIError, Forbidden, FailedPrecondition, BadRequest
 
 from llm import GEMINI, HUGGINGFACE, setup_model
 from utils import FallbackLoggingHandler
 
-# ResourceExhausted handles the 429 Rate Limit error.
-# GoogleAPIError handles general 5xx/server/network drops.
-GEMINI_ERRORS = (
-    ResourceExhausted,
-    GoogleAPIError,
-    Forbidden,
-    FailedPrecondition,
-    ValueError,
-    Exception
-)
+# Settings for Exponential Retry
+MAX_RETRIES = 5
+BASE_WAIT = 10
 
 class AgentState(TypedDict):
     """Agent state for the graph."""
@@ -28,20 +24,20 @@ class AgentState(TypedDict):
 
 class Agent:
     def __init__(self, tools, sys_prompt):
+        print('Setting up the primary LLM as Gemini and backup LLM as Qwen')
         primary_llm = setup_model(GEMINI, callbacks=[FallbackLoggingHandler()])
         backup_llm = setup_model(HUGGINGFACE)
-        
-        resilient_model = primary_llm.with_fallbacks(
+        self.llm  = primary_llm.with_fallbacks(
             fallbacks=[backup_llm],
-            # exceptions_to_handle=GEMINI_ERRORS
         )
 
-        self.llm = resilient_model
         self.tools = ToolNode(tools)
         self.llm_with_tools = self.llm.bind_tools(tools)
         self.sys_prompt = sys_prompt
         
+        print('Building the agent ... ...')
         self.graph = self._graph_compile_()
+        self.thread_id = str(uuid.uuid4())
 
     def _graph_compile_(self):
         builder = StateGraph(AgentState)
@@ -60,17 +56,16 @@ class Agent:
 
         graph = builder.compile(checkpointer=MemorySaver())
         return graph
-
-    def _assistant_(self, state):
-        sys_msg = SystemMessage(
-            content=self.sys_prompt
-        )
+    
+    def _assistant_(self, state: AgentState) -> dict: # -> Call models
+        sys_msg = SystemMessage(content=self.sys_prompt)
+        response = self.llm_with_tools.invoke([sys_msg] + state["messages"])
         return {
-            "messages": [self.llm_with_tools.invoke([sys_msg] + state["messages"])],
+            "messages": [response], 
             "input_file": state.get("input_file", None)
         }
 
-    def _generate_(self, state):
+    def _generate_(self, state) -> dict:
         """Generate answer."""
         # Get generated ToolMessages
         recent_tool_messages = []
@@ -102,16 +97,65 @@ class Agent:
 
         # Run
         response = self.llm_with_tools.invoke(prompt)
-        return {"messages": [response]}
+        return {
+            "messages": [response],
+            "input_file": state.get("input_file", None)
+        }
     
-    def __call__(self, human_message):
-        for step in self.graph.stream(
-            {"messages": [{"role": "user", "content": human_message}]},
-            stream_mode="values",
-            config={"configurable": {"thread_id": "abc123"}}
-        ):
-            step["messages"][-1].pretty_print()
+    def extract_after_final_answer(self, text: str) -> str:
+        keywords = ["FINAL ANSWER", "SUGGESTION"]
+        # re.findall finds every instance of { ... }
+        # [^}]* ensures we don't accidentally skip over nested structures
+        matches = re.findall(r'(\{.*?\})', text, re.DOTALL)
+        if not matches:
+            return None
+        
+        # We take the last match [-1]
+        last_json_str = matches[-1]
+        
+        try:
+            # Replace single quotes with double quotes for valid JSON
+            # (LLMs often use ' which is valid Python but invalid JSON)
+            valid_json_str = last_json_str.replace("'", '"')
+            data = json.loads(valid_json_str)
+            output = ""
+            for keyword in keywords:
+                output += f"{keyword}: {data.get(keyword, "Nothing mentioned HERE")}\n"
+            return output
+        except json.JSONDecodeError:
+            return None
 
-    
+    def __call__(self, human_message: str) -> str:
+        # Formulate the payload exactly how your StateGraph expects it
+        payload = {
+            "messages": [{"role": "user", "content": human_message}]
+        }
+
+        for attempt in range(MAX_RETRIES):
+            try:
+                # Invoke the graph
+                response = self.graph.invoke(payload, config={"configurable": {"thread_id": self.thread_id}})
+                
+                # Extract the text content safely from the final state messgae
+                final_message_content = response['messages'][-1].content
+                final_ans = self.extract_after_final_answer(final_message_content)
+                return final_ans
+            
+            except Exception as e:
+                # Exponential backoff calculation: 2s, 4s, 8s, 16s...
+                sleep_time = BASE_WAIT * (2 ** attempt) 
+                
+                if attempt < MAX_RETRIES - 1:
+                    print(f"Error: {str(e)}")
+                    print(f"Attempt {attempt + 1} failed. Retrying in {sleep_time} seconds...")
+                    time.sleep(sleep_time)
+                else:
+                    return f"Error processing query after {MAX_RETRIES} attempts: {str(e)}"
+
     def visualize(self):
+        print('Visualise the agent workflow and saved it in workflow.png')
         self.graph.get_graph().draw_mermaid_png(output_file_path="workflow.png")
+
+    def get_chat_history(self) -> list[str]:
+        config = {"configurable": {"thread_id": self.thread_id}}
+        return self.graph.get_state(config).values["messages"]
