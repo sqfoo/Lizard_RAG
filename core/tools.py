@@ -15,7 +15,7 @@ from langchain_community.retrievers import WikipediaRetriever
 from langchain_community.utilities import GoogleSerperAPIWrapper
 from langchain_community.document_loaders import ImageCaptionLoader
 
-from database import database
+from core.database import database
 load_dotenv()
 
 @tool

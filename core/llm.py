@@ -25,6 +25,20 @@ HUGGINGFACE = {
     'model': 'huggingface:Qwen2.5-7B-Instruct',
 }
 
+HUGGINGFACE_LITE = {
+    'type': 'huggingface',
+    'param':{
+        'repo_id': "Qwen/Qwen2.5-1.5B-Instruct",
+
+        'task': 'text-generation',
+        'max_new_tokens': 512,
+        'do_sample': False,
+        'repetition_penalty': 1.03,
+        'provider': 'auto',
+    },
+    'model': 'huggingface:Qwen2.5-1.5B-Instruct',
+}
+
 GEMINI = {
     "type": "gemini",
     "param": {

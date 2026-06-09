@@ -11,7 +11,7 @@ load_dotenv()
 import time
 TIME_TO_SLEEP = 10
 
-from llm import HUGGINGFACE, GEMINI, setup_model
+from core.llm import HUGGINGFACE, GEMINI, setup_model
 
 class Database:
     def __init__(self):
