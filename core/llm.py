@@ -29,7 +29,6 @@ HUGGINGFACE_LITE = {
     'type': 'huggingface',
     'param':{
         'repo_id': "Qwen/Qwen2.5-1.5B-Instruct",
-
         'task': 'text-generation',
         'max_new_tokens': 512,
         'do_sample': False,
@@ -42,8 +41,8 @@ HUGGINGFACE_LITE = {
 GEMINI = {
     "type": "gemini",
     "param": {
-        "model": "gemini-2.5-flash",
-        # "model": "gemini-2.5-flash-lite",
+        # "model": "gemini-2.5-flash",
+        "model": "gemini-2.5-flash-lite",
         "max_tokens": 512,
         "max_retries": 0,
         "timeout": 0.0

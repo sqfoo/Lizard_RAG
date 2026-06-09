@@ -28,7 +28,7 @@ class TriggerRAG(BaseModel):
     query: str = Field(description="The search query for the knowledge base")
 
 class Agent:
-    def __init__(self, tools, sys_prompt, keywords, extract=True):
+    def __init__(self, tools, sys_prompt, keywords, extract=True, name=''):
         print('Setting up the primary LLM as Gemini and backup LLM as Qwen')
         primary_llm = setup_model(GEMINI, callbacks=[FallbackLoggingHandler()])
         backup_llm = setup_model(HUGGINGFACE)
@@ -46,12 +46,13 @@ class Agent:
         
         self.keywords = keywords
         self.extract = extract
+        self.name = name
 
     def _graph_compile_(self):
         builder = StateGraph(AgentState)
         builder.add_node("tools", self.tools)
         builder.add_node("assistant", self._assistant_)
-        builder.add_node("generate", self._generate_)
+        builder.add_node("rag", self._rag_)
 
         builder.add_edge(START, "assistant")
         builder.add_conditional_edges(
@@ -59,12 +60,12 @@ class Agent:
             self.rag_router,
             {
                 "tools": "tools",
-                "generate": "generate",
+                "rag": "rag",
                 END: END
             },
         )
         builder.add_edge("tools", "assistant")
-        builder.add_edge("generate", "assistant")
+        builder.add_edge("rag", "assistant")
 
         graph = builder.compile(checkpointer=MemorySaver())
         return graph
@@ -77,7 +78,7 @@ class Agent:
         
         # Check if the specific RAG tool was called
         if last_message.tool_calls[0]["name"] == "TriggerRAG":
-            return "generate"
+            return "rag"
             
         return "tools" # Otherwise, it's a normal tool
 
@@ -89,7 +90,7 @@ class Agent:
             "input_file": state.get("input_file", None)
         }
 
-    def _generate_(self, state) -> dict:
+    def _rag_(self, state) -> dict:
         """Generate answer."""
         # Get generated ToolMessages
         recent_tool_messages = []
@@ -129,7 +130,6 @@ class Agent:
     def extract_after_final_answer(self, text: str) -> str:
         # re.findall finds every instance of { ... }
         # [^}]* ensures we don't accidentally skip over nested structures
-        print(text)
         matches = re.findall(r'(\{.*?\})', text, re.DOTALL)
         if not matches:
             return None

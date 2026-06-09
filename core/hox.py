@@ -2,13 +2,15 @@ import re
 import json
 import uuid
 import time
-from typing import Literal, TypedDict, Annotated, Optional
+from datetime import datetime
+from typing import Literal, TypedDict, Annotated
 from langgraph.graph import END, StateGraph, START
 from langchain_core.messages import AnyMessage
+from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph.message import add_messages
 
 from core.agent import Agent, AgentState
-from core.prompts import GENERAL_PROMPT, VERIFY_PROMPT, CORE_PROMPT
+from core.prompts import GENERAL_PROMPT, CORE_PROMPT
 from core.tools import *
 
 TOOLBOX = [
@@ -35,16 +37,18 @@ class AgentState(TypedDict):
     helper_instruction: str           # Coordinator writes this for the helper
     helper_response: str              # Helper writes its output here
     messages: Annotated[list[AnyMessage], add_messages]    # (Optional) Global chat history
+    final_decision: str               # Determine helper or end
 
 
-class System:
+class HOX:
     def __init__(self):
         print('Setting up the Core Agent ...')
         self.core = Agent(
             tools=[duckduck_websearch, visit_webpage, upload_new_source, fetch_existing_data], 
             sys_prompt=CORE_PROMPT, 
             keywords=["FINAL ANSWER", "SUGGESTION"],
-            extract=False
+            extract=False,
+            name='core'
         )
         self.core_prompt = "[TASK]: {TASK} \n[RESPONSE]: {RESPONSE}"
 
@@ -53,13 +57,16 @@ class System:
             tools=TOOLBOX,
             sys_prompt=GENERAL_PROMPT,
             keywords=["FINAL ANSWER"],
-            extract=False
+            extract=False,
+            name='helper'
         )
 
         print('Building the system')
         self.graph = self._compile_()
         self.thread_id = str(uuid.uuid4())
         self.set_thread(self.thread_id)
+
+        self.chat_history = []
 
     def _core_(self, state: AgentState):
         # 1. Check if this is the FIRST run or a SUBSEQUENT run
@@ -108,6 +115,13 @@ class System:
                 else:
                     result["SUGGESTION"] = "The supervisor instruction was corrupt. Please continue updating."
 
+        self.chat_history.append({
+            'role': self.core.name,
+            'timestamp': datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
+            'task': f'[TASK]: {prompt_input["TASK"]} with helper response of {prompt_input["RESPONSE"]}',
+            'response': f'[FINAL DECISION]: {str(result.get("FINAL ANSWER", "FALSE")).upper().strip()} with helper instruction of {result.get("SUGGESTION", "")}'
+        })
+        
         return {
             "helper_instruction": result.get("SUGGESTION", ""),
             "final_decision": str(result.get("FINAL ANSWER", "FALSE")).upper().strip()
@@ -122,6 +136,13 @@ class System:
         response = self.helper(current_subtask)
         print(f'🤖 [Helper] Completed work and respond {response}.')
         
+        self.chat_history.append({
+            'role': self.helper.name,
+            'timestamp': datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
+            'task': f'Subtask: {current_subtask}',
+            'response': response
+        })
+
         # Return the response back to the state
         return {
             "helper_instruction": current_subtask,
@@ -130,7 +151,7 @@ class System:
     
     def router_condition(self, state: AgentState) -> Literal["helper", "__end__"]:
         # Check the decision made by the core node
-        if state.get("FINAL ANSWER", "FALSE") == "TRUE":
+        if state.get("final_decision", "FALSE") == "TRUE":
             print("\n✅ [System]: Task complete. Exiting workflow...\n")
             return "__end__"
         
@@ -150,7 +171,7 @@ class System:
         )
         builder.add_edge('helper', 'core')
 
-        graph = builder.compile()
+        graph = builder.compile(checkpointer=MemorySaver())
         return graph
 
     def extract_after_final_answer(self, text: str) -> str:
@@ -182,6 +203,13 @@ class System:
             "helper_response": "",
             "final_decision": "FALSE"
         }
+
+        self.chat_history.append({
+            'role': 'User/Human',
+            'timestamp': datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
+            'task': f'Main Task: {human_message}',
+            'response': ''
+        })
 
         for attempt in range(MAX_RETRIES):
             try:
@@ -215,5 +243,9 @@ class System:
         self.helper.set_thread(thread_id)
 
     def visualize(self):
-        print('Visualise the agent workflow and saved it in system.png')
-        self.graph.get_graph().draw_mermaid_png(output_file_path="system.png")
+        print('Visualise the setup of HOX and saved it in hox.png')
+        self.graph.get_graph().draw_mermaid_png(output_file_path="hox.png")
+
+    def get_hox_chat_history(self) -> List[dict]:
+        return self.chat_history
+    
