@@ -10,7 +10,8 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph.message import add_messages
 
 from core.agent import Agent, AgentState
-from core.prompts import GENERAL_PROMPT, CORE_PROMPT
+from core.prompts import GENERAL_PROMPT, CORE_PROMPT, SPECIALIST_PROMPT, COORDINATOR_PROMPT
+from core.llm import GEMINI, GEMINI_LITE, HUGGINGFACE, HUGGINGFACE_LITE
 from core.tools import *
 
 TOOLBOX = [
@@ -44,8 +45,10 @@ class HOX:
     def __init__(self):
         print('Setting up the Core Agent ...')
         self.core = Agent(
+            primary_LLM=GEMINI_LITE,
+            backup_LLM=HUGGINGFACE_LITE,
             tools=[duckduck_websearch, visit_webpage, upload_new_source, fetch_existing_data], 
-            sys_prompt=CORE_PROMPT, 
+            sys_prompt=COORDINATOR_PROMPT, 
             keywords=["FINAL ANSWER", "SUGGESTION"],
             extract=False,
             name='core'
@@ -54,8 +57,10 @@ class HOX:
 
         print('Setting up the Helper Agent ...')
         self.helper = Agent(
+            primary_LLM=GEMINI_LITE,
+            backup_LLM=HUGGINGFACE_LITE,
             tools=TOOLBOX,
-            sys_prompt=GENERAL_PROMPT,
+            sys_prompt=SPECIALIST_PROMPT,
             keywords=["FINAL ANSWER"],
             extract=False,
             name='helper'
@@ -106,6 +111,11 @@ class HOX:
             try:
                 # Strip markdown code blocks if the LLM added them
                 clean_content = str(llm_output).replace("```json", "").replace("```", "").strip()
+                # FIX: Regex replacement to find and escape illegal unescaped control newlines inside JSON strings
+                # This stops the "Invalid control character at: line 1 column..." crash dead in its tracks.
+                clean_content = re.sub(r'(?<=[:[,])\s*"\s*(.*?)\s*"\s*(?=[,\}\]])', 
+                                       lambda m: m.group(0).replace('\n', '\\n'), 
+                                       clean_content)
                 result = json.loads(clean_content)
             except Exception as e:
                 print(f"❌ [Core] Failed to parse LLM JSON: {e}")
@@ -113,18 +123,24 @@ class HOX:
                 if not helper_reply:
                     result["SUGGESTION"] = f"Please solve this task: {state['task']}"
                 else:
-                    result["SUGGESTION"] = "The supervisor instruction was corrupt. Please continue updating."
+                    result["SUGGESTION"] = f"Continue refining the solution for the core goal: {state['task']}. Focus on resolving missing data or calculations."
+        
+        # 4. State Updates & Logging
+        final_decision = str(result.get("FINAL ANSWER", "FALSE")).upper().strip()
+        # Quick health validation on the parsed state
+        if final_decision not in ["TRUE", "FALSE"]:
+            final_decision = "FALSE"
 
         self.chat_history.append({
             'role': self.core.name,
             'timestamp': datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
             'task': f'[TASK]: {prompt_input["TASK"]} with helper response of {prompt_input["RESPONSE"]}',
-            'response': f'[FINAL DECISION]: {str(result.get("FINAL ANSWER", "FALSE")).upper().strip()} with helper instruction of {result.get("SUGGESTION", "")}'
+            'response': f'[FINAL DECISION]: {final_decision} with helper instruction of {result.get("SUGGESTION", "")}'
         })
         
         return {
             "helper_instruction": result.get("SUGGESTION", ""),
-            "final_decision": str(result.get("FINAL ANSWER", "FALSE")).upper().strip()
+            "final_decision": final_decision
         }
     
     def _helper_(self, state: AgentState):
@@ -215,11 +231,6 @@ class HOX:
             try:
                 # Invoke the graph
                 response = self.graph.invoke(payload, config={"configurable": {"thread_id": self.thread_id}})
-                
-                # # Extract the text content safely from the final state messgae
-                # final_message_content = response['messages'][-1].content
-                # final_ans = self.extract_after_final_answer(final_message_content)
-                # return final_ans
                 if response.get("final_decision") == "TRUE":
                     return f"### Final Task Output:\n{response.get('helper_instruction')}"
                 else:

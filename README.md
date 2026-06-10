@@ -17,6 +17,13 @@ Lizard is a testing agent framework designed to explore agentic system design pa
 - Reliable tool execution and validation
 - Extensible architecture for multi-agent systems -->
 
+We have the coordination between ```core``` and a ```helper``` agent, named as **HOX**, current it is able to solve easy task, like Mathematical Arithmetics, feel free to check the chats in [chats/hox_ctx.txt](chats/hox_ctx.txt). However, it still fails to do some open-tasks, like market analysis. We will work hard to resolve this.
+
+<p align="center">
+    <img src="hox.png" alt="workflow" width="200"><br>
+    Workflow of <b>HOX</b>
+</p>
+
 **⚠️** This project is under active development. APIs and architecture may change frequently.
 
 # 🛠 To-Do
@@ -24,7 +31,7 @@ Lizard is a testing agent framework designed to explore agentic system design pa
 - **Vector-based Memory** with ```FAISS```
 - **Thread Conversion Management** with ```thread_id``` -> DONE
 - **Cross-tool Output Verfication** to improve reliability
-- **Multi-Agent Coordination**
+- **Multi-Agent Coordination** -> Working on it
 - **Scheme Visualization** -> DONE
 - **Primary LLM with Backup LLM** -> DONE
 - **Agent return Response, instead print out something** -> DONE

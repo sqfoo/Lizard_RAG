@@ -15,7 +15,6 @@ HUGGINGFACE = {
     'type': 'huggingface',
     'param':{
         'repo_id': "Qwen/Qwen2.5-7B-Instruct",
-
         'task': 'text-generation',
         'max_new_tokens': 512,
         'do_sample': False,
@@ -26,7 +25,7 @@ HUGGINGFACE = {
 }
 
 HUGGINGFACE_LITE = {
-    'type': 'huggingface',
+    'type': 'huggingface-lite',
     'param':{
         'repo_id': "Qwen/Qwen2.5-1.5B-Instruct",
         'task': 'text-generation',
@@ -41,7 +40,16 @@ HUGGINGFACE_LITE = {
 GEMINI = {
     "type": "gemini",
     "param": {
-        # "model": "gemini-2.5-flash",
+        "model": "gemini-2.5-flash",
+        "max_tokens": 512,
+        "max_retries": 0,
+        "timeout": 0.0
+    }
+}
+
+GEMINI_LITE = {
+    "type": "gemini-lite",
+    "param": {
         "model": "gemini-2.5-flash-lite",
         "max_tokens": 512,
         "max_retries": 0,
@@ -49,11 +57,13 @@ GEMINI = {
     }
 }
 
+valid_LLM = [GEMINI, GEMINI_LITE, HUGGINGFACE, HUGGINGFACE_LITE]
+
 def setup_model(config: dict, callbacks=None):
-    if config['type'] == 'huggingface':
+    if config['type'].startswith('huggingface'):
         llm = HuggingFaceEndpoint(**config['param'])
         model = ChatHuggingFace(llm=llm, callbacks=callbacks)
-    elif config['type'] in ['gemini']:
+    elif config['type'].startswith('gemini'):
         model = ChatGoogleGenerativeAI(**config['param'], callbacks=callbacks)
     else:
         model = None

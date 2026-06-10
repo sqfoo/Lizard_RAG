@@ -2,7 +2,7 @@ import re
 import time
 import uuid
 import json
-from typing import TypedDict, Annotated, Optional
+from typing import TypedDict, Annotated, Optional, Literal
 
 from langgraph.graph import END, StateGraph, START
 from langchain_core.messages import AnyMessage, SystemMessage
@@ -11,7 +11,7 @@ from langgraph.prebuilt import ToolNode
 from langgraph.checkpoint.memory import MemorySaver
 from pydantic import BaseModel, Field
 
-from core.llm import GEMINI, HUGGINGFACE, setup_model, HUGGINGFACE_LITE
+from core.llm import setup_model, valid_LLM
 from core.utils import FallbackLoggingHandler
 
 # Settings for Exponential Retry
@@ -28,10 +28,13 @@ class TriggerRAG(BaseModel):
     query: str = Field(description="The search query for the knowledge base")
 
 class Agent:
-    def __init__(self, tools, sys_prompt, keywords, extract=True, name=''):
-        print('Setting up the primary LLM as Gemini and backup LLM as Qwen')
-        primary_llm = setup_model(GEMINI, callbacks=[FallbackLoggingHandler()])
-        backup_llm = setup_model(HUGGINGFACE)
+    def __init__(self, primary_LLM: dict, backup_LLM: dict, tools: list, sys_prompt: str, keywords: list[str], extract: bool =True, name: str =''):
+        assert primary_LLM in valid_LLM, f"{primary_LLM} is invalid, Please specify any from {valid_LLM}"
+        assert backup_LLM in valid_LLM, f"{backup_LLM} is invalid, Please specify any from {valid_LLM}"
+
+        print(f'Setting up {primary_LLM['type']} as the primary LLM, {backup_LLM['type']} as the backup LLM ...')
+        primary_llm = setup_model(primary_LLM, callbacks=[FallbackLoggingHandler()])
+        backup_llm = setup_model(backup_LLM)
         self.llm  = primary_llm.with_fallbacks(
             fallbacks=[backup_llm],
         )
@@ -61,7 +64,7 @@ class Agent:
             {
                 "tools": "tools",
                 "rag": "rag",
-                END: END
+                "__end__": END
             },
         )
         builder.add_edge("tools", "assistant")
@@ -70,7 +73,7 @@ class Agent:
         graph = builder.compile(checkpointer=MemorySaver())
         return graph
     
-    def rag_router(self, state: AgentState):
+    def rag_router(self, state: AgentState) -> Literal["tools", "rag", "__end__"]:
         last_message = state["messages"][-1]
         
         if not last_message.tool_calls:
