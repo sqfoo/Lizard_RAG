@@ -15,12 +15,57 @@ os.environ['GRPC_VERBOSITY'] = 'ERROR'
 # 3. Prevent the 'init.cc' timeout message from showing
 os.environ['GLOG_minloglevel'] = '2'
 
-from core.hox import HOX
+from core.llm import *
+from core.agent import Agent
+from core.hox import Hox
 from core.tools import *
 from core.database import database
+from core.templates import CENTRAL_TEMPLATE, VALIDATE_TEMPLATE
+from core.prompts import COORDINATOR_PROMPT, VALIDATE_PROMPT, HELPER_PROMPT
 
-agent = HOX()
-agent.visualize()
+central_agent = Agent(
+    primary_LLM=GEMINI,
+    backup_LLM=HUGGINGFACE,
+    tools=[duckduck_websearch,],
+    sys_prompt=COORDINATOR_PROMPT
+)
+
+validate_agent = Agent(
+    primary_LLM=GEMINI,
+    backup_LLM=HUGGINGFACE,
+    tools=[duckduck_websearch, run_python, multiply, add, subtract, divide, fetch_existing_data],
+    sys_prompt=VALIDATE_PROMPT
+)
+
+helpers = {
+    'assistant': Agent(
+        primary_LLM=GEMINI,
+        backup_LLM=HUGGINGFACE,
+        tools=[
+            duckduck_websearch,
+            visit_webpage,
+            youtube_viewer,
+            image_caption,
+            run_python,
+            multiply,
+            add,
+            subtract,
+            divide,
+            upload_new_source,
+            fetch_existing_data
+        ],
+        sys_prompt=HELPER_PROMPT
+    )
+}
+
+hox = Hox(
+    central_agent=central_agent,
+    helper_agents=helpers,
+    validate_agent=validate_agent,
+    central_template=CENTRAL_TEMPLATE,
+    validate_template=VALIDATE_TEMPLATE
+)
+hox.visualize()
 
 keep = True
 
@@ -28,30 +73,10 @@ while keep:
     keep = input("Keep Running?") in ['Y', 'y', 'Yes', 'yes']
     input_message = input("Human Message: ")
 
-    resp = agent(input_message)
-    verify = f'TASK: {input_message}; RESPONSE: {resp}'
+    resp = hox(input_message)
     print(f'Agent Response: {resp}')
     print('-'*20)
-    
 
-chat_history = agent.get_hox_chat_history()
-print('*'*20)
-
-with open('chats/hox_ctx.txt', 'a') as f:
-    # 1. Get the current epoch timestamp (float)
-    timestamp = time.time()
-
-    # 2. Convert to a readable string (e.g., "2026-06-02 21:33:58")
-    readable_time = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-
-    f.write(f'Chat saved at {readable_time}\n')
-    print('Saving the chat content')
-
-    for chat in chat_history:
-        role, timestamp, task, response = chat.values()
-        f.write(f'\n======= {role} Message =======\n')
-        f.write(f'at {timestamp}\n')
-        f.write(f'To Do: {task}\n')
-        f.write(f'Response: {response}\n')
+hox.save_chat('chats')
 
 database.save()

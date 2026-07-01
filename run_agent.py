@@ -24,7 +24,6 @@ from core.llm import GEMINI, GEMINI_LITE, HUGGINGFACE, HUGGINGFACE_LITE
 TOOLBOX = [
     duckduck_websearch,
     visit_webpage,
-    wiki_search,
     youtube_viewer,
     image_caption,
     run_python,

@@ -31,3 +31,2351 @@ Calculate 2 + 67
 === AI ===
 {"FINAL ANSWER": "69", "SUGGESTION": "Use the subtract tool to find the difference between two numbers; Use the multiply tool to multiply two numbers; Use the divide tool to divide two numbers"}
 
+Chat saved at 2026-06-23 03:53:48
+=== Human ===
+Read the file, test_CV.pdf, and tell me who is him?
+
+=== AI ===
+
+
+=== Tool ===
+true
+
+=== AI ===
+
+
+=== Tool ===
+Source: {'producer': 'pdfTeX-1.40.27', 'creator': 'LaTeX with hyperref', 'creationdate': '2026-03-02T14:15:45+00:00', 'author': '', 'keywords': '', 'moddate': '2026-03-02T14:15:45+00:00', 'ptex.fullbanner': 'This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) kpathsea version 6.4.1', 'subject': '', 'title': '', 'trapped': '/False', 'source': 'test_CV.pdf', 'total_pages': 1, 'page': 0, 'page_label': ''}
+Content: •Operated Fabry-Pérot filter to isolate specific wavelength ranges, gaining hands-on experience with optical instru-
+ments.
+TECHNICAL SKILLS
+•Programming:Python
+•ML Frameworks:PyTorch, TensorFlow
+•ML Techniques:Generative Models, Diffusion Models, Spatiotemporal Modeling, Time Series Forecasting
+•Tools:Git, Linux, TensorBoard, Gradio, HuggingFace
+HONORS & AWARDS
+Paul Ching Wu Chu Scholarship for Physics Students 2021-2022
+Physics Entry Scholarship 2019-2022
+HKSAR Government Scholarship Fund - Belt and Road Scholarship (Malaysia) 2018-2022
+Honorable Mention in 19th Asian Physics Olympiad 2018
+REFERENCES
+•Prof. Yeung Dit-Yan
+Chair Professor, Department of Computer Science and Engineering, HKUST Available Upon Request
+
+Source: {'producer': 'pdfTeX-1.40.27', 'creator': 'LaTeX with hyperref', 'creationdate': '2026-03-02T14:15:45+00:00', 'author': '', 'keywords': '', 'moddate': '2026-03-02T14:15:45+00:00', 'ptex.fullbanner': 'This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) kpathsea version 6.4.1', 'subject': '', 'title': '', 'trapped': '/False', 'source': 'test_CV.pdf', 'total_pages': 1, 'page': 0, 'page_label': ''}
+Content: Shi Quan, FOO
+Phone: +852 - 6064 9248
+Email: sqfoo@connect.ust.hk
+/g♀be·/gtb·/♀nedn
+Machine Learning researcher specializing in generative and spatiotemporal models. Co-
+author of NeurIPS 2024 and TMLR 2025 papers on precipitation nowcasting. Experienced
+in building PyTorch models and processing large-scale radar datasets.
+EDUCATION
+Bachelor of Science with Major in PhysicsSep 2018 - Aug 2022
+The Hong Kong University of Science and Technology (HKUST), Hong Kong GPA: 3.811/4.300
+PUBLICATIONS
+STLDM: Spatio-Temporal Latent Diffusion Model for Precipitation Nowcasting. Transactions on Machine Learning
+Research (TMLR), 2025.[Paper] [Code] [Demo]
+Fourier Amplitude and Correlation Loss: Beyond Using L2 loss for Skillful Precipitation Nowcasting. NeurIPS 2024.
+[Paper] [Code]
+PROFESSIONAL AND RESEARCH EXPERIENCE
+Research Assistant|Prof. Yeung Dit-Yan’s lab, HKUST, Hong KongAug 2022 - Present
+
+Source: {'producer': 'pdfTeX-1.40.27', 'creator': 'LaTeX with hyperref', 'creationdate': '2026-03-02T14:15:45+00:00', 'author': '', 'keywords': '', 'moddate': '2026-03-02T14:15:45+00:00', 'ptex.fullbanner': 'This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) kpathsea version 6.4.1', 'subject': '', 'title': '', 'trapped': '/False', 'source': 'test_CV.pdf', 'total_pages': 1, 'page': 0, 'page_label': ''}
+Content: •Analyzed historical rainfall time series data to estimate heavy rainfall probability using analog methods.
+•Cleaned and aggregated time-series rainfall data to support statistical analysis.
+•Presented statistical rainfall analysis results to the meteorological staff.
+Undergraduate Researcher|Prof. Jo Gyu-Boong’s Lab, HKUST, Hong KongFeb 2021 - Dec 2021
+•Developed software to control and calibrate the Digital Micro-Mirror Device (DMD) for laser beam modulation.
+•Collected and validated experimental optical data, ensuring the measurement consistency.
+Undergraduate Researcher|Prof. Du Shengwang’s Lab, HKUST, Hong KongApr 2019 - Jun 2020
+•Built a PID-controlled circuit for laser intensity stabilization.
+•Simulated and conducted a theoretical study on an Electromagnetically Induced Transparency (EIT) system.
+•Operated Fabry-Pérot filter to isolate specific wavelength ranges, gaining hands-on experience with optical instru-
+ments.
+TECHNICAL SKILLS
+•Programming:Python
+
+Source: {'producer': 'pdfTeX-1.40.27', 'creator': 'LaTeX with hyperref', 'creationdate': '2026-03-02T14:15:45+00:00', 'author': '', 'keywords': '', 'moddate': '2026-03-02T14:15:45+00:00', 'ptex.fullbanner': 'This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) kpathsea version 6.4.1', 'subject': '', 'title': '', 'trapped': '/False', 'source': 'test_CV.pdf', 'total_pages': 1, 'page': 0, 'page_label': ''}
+Content: [Paper] [Code]
+PROFESSIONAL AND RESEARCH EXPERIENCE
+Research Assistant|Prof. Yeung Dit-Yan’s lab, HKUST, Hong KongAug 2022 - Present
+•Designed large-scale data pipelines processing radar reflectivity and rainfall datasets for spatiotemporal forecast-
+ing models.
+•DevelopedFACL, a Fourier-based loss that improves precipitation nowcasting visual sharpness by 50%. This
+work was accepted at NeurIPS 2024.
+•DevelopedSTLDM, a spatiotemporal latent diffusion model for precipitation nowcasting, achieving SOTA per-
+formance across multiple radar datasets and 10× faster inference. This work was accepted at TMLR 2025.
+•Released official open-source implementation and deployed an interactive Gradio demo for model inference.
+Summer Intern|Hong Kong Observatory (HKO), Hong KongJun 2021 - Jul 2021
+•Analyzed historical rainfall time series data to estimate heavy rainfall probability using analog methods.
+•Cleaned and aggregated time-series rainfall data to support statistical analysis.
+
+=== AI ===
+{"FINAL ANSWER": "The file indicates that \"him\" is Shi Quan, a Machine Learning researcher specializing in generative and spatiotemporal models. He is a co-author of NeurIPS 2024 and TMLR 2025 papers on precipitation nowcasting and has experience building PyTorch models and processing large-scale radar datasets.", "SUGGESTION": "Find more publications by Shi Quan; Research precipitation nowcasting; Learn about generative and spatiotemporal models"}
+
+=== Human ===
+Calculate 2 * 3 + 102 / 9
+
+=== AI ===
+
+
+=== Tool ===
+null
+
+=== AI ===
+{"FINAL ANSWER": "17.333333333333332", "SUGGESTION": "Calculate 17.333333333333332 * 2; Calculate 17.333333333333332 + 2; Calculate 17.333333333333332 - 2"}
+
+Chat saved at 2026-06-23 04:05:07
+=== Human ===
+What is today weather?
+
+=== AI ===
+
+
+=== Tool ===
+National and Local Weather Radar, Daily Forecast, Hurricane and information from The Weather Channel and weather.com
+
+ 
+
+Hamburger
+
+The Weather Company
+
+Home
+
+HomeHome
+Today
+
+TodayToday
+Hourly
+
+HourlyHourly
+Close
+
+10 Day10 Day
+Monthly
+
+MonthlyMonthly
+Radar
+
+RadarRadar
+Video
+
+VideoVideo
+
+ExploreExploreSevere Weather
+
+Hurricane
+
+Hurricane CentralHurricane Central
+Tornado
+
+Tornado CentralTornado Central
+Storm
+
+Safety & PrepSafety & PrepHealth & Wellness
+
+Allergy
+
+Allergy TrackerAllergy Tracker
+Breathing
+
+Air Quality IndexAir Quality Index
+Virus
+
+Cold & Flu TrackerCold & Flu Tracker
+Playlist
+
+SkinSkinLifestyle
+
+Playlist
+
+Home & GardenHome & Garden
+Playlist
+
+Pets & AnimalsPets & Animals
+Playlist
+
+RecipesRecipes
+Playlist
+
+Space & SkywatchingSpace & Skywatching
+Playlist
+
+Travel & OutdoorsTravel & Outdoors
+Products
+
+Product Reviews & DealsProduct Reviews & Deals
+Products
+
+ShopShop
+Close
+
+The Weather Company
+
+Home
+
+HomeHome
+Today
+
+TodayToday
+Hourly
+
+HourlyHourly
+Close
+
+10 Day10 Day
+Monthly
+
+MonthlyMonthly
+Radar
+
+RadarRadar
+Video
+
+VideoVideo
+
+ExploreExploreSevere Weather
+
+Hurricane
+
+Hurricane CentralHurricane Central
+Tornado
+
+Tornado CentralTornado Central
+Storm
+
+Safety & PrepSafety & PrepHealth & Wellness
+
+Allergy
+
+Allergy TrackerAllergy Tracker
+Breathing
+
+Air Quality IndexAir Quality Index
+Virus
+
+Cold & Flu TrackerCold & Flu Tracker
+Playlist
+
+SkinSkinLifestyle
+
+Playlist
+
+Home & GardenHome & Garden
+Playlist
+
+Pets & AnimalsPets & Animals
+Playlist
+
+RecipesRecipes
+Playlist
+
+Space & SkywatchingSpace & Skywatching
+Playlist
+
+Travel & OutdoorsTravel & Outdoors
+Products
+
+Product Reviews & DealsProduct Reviews & Deals
+Products
+
+ShopShopSkip to Main ContentAccessibility Help
+The Weather Company
+
+Type at least three characters to start auto complete. Recently searched locations will be displayed if there is no search query. The first option will be automatically selected. Use up and down arrows to change selection. Use escape to clear.Search City or Zip Code
+Search
+
+RecentsClearYou have no recent locationsGlobe
+US°F
+
+°F°CHybridImperial - F / mph / miles / inchesAmericas
+Add
+
+Antigua and Barbuda | EnglishArgentina | EspañolBahamas | EnglishBarbados | EnglishBelize | EnglishBolivia | EspañolBrazil | PortuguêsCanada | EnglishCanada | FrançaisChile | EspañolColombia | EspañolCosta Rica | EspañolDominica | EnglishDominican Republic | EspañolEcuador | EspañolEl Salvador | EspañolGrenada | EnglishGuatemala | EspañolGuyana | EnglishHaiti | FrançaisHonduras | EspañolJamaica | EnglishMexico | EspañolNicaragua | EspañolPanama | EspañolPanama | EnglishParaguay | EspañolPeru | EspañolSt. Kitts and Nevis | EnglishSt. Lucia | EnglishSt. Vincent and the Grenadines | EnglishSuriname | NederlandsTrinidad and Tobago | EnglishUruguay | EspañolUnited States | EnglishUnited States | EspañolVenezuela | EspañolAfrica
+Add
+
+Algeria | العربيةAlgeria | FrançaisAngola | PortuguêsBenin | FrançaisBurkina Faso | FrançaisBurundi | FrançaisCameroon | FrançaisCameroon | EnglishCape Verde | PortuguêsCentral African Republic | FrançaisChad | FrançaisChad | العربيةComoros | FrançaisComoros | العربيةDemocratic Republic of the Congo | FrançaisRepublic of Congo | FrançaisCôte d'Ivoire | FrançaisDjibouti | FrançaisDjibouti | العربيةEgypt | العربيةEquatorial Guinea | EspañolEritrea | العربيةGabon | FrançaisGambia | EnglishGhana | EnglishGuinea | FrançaisGuinea-Bissau | PortuguêsKenya | EnglishLesotho | EnglishLiberia | EnglishLibya | العربيةMadagascar | FrançaisMali | FrançaisMauritania | العربيةMauritius | EnglishMauritius | FrançaisMorocco | العربيةMorocco | FrançaisMozambique | PortuguêsNamibia | EnglishNiger | FrançaisNigeria | EnglishRwanda | FrançaisRwanda | EnglishSao Tome and Principe | PortuguêsSenegal | FrançaisSierra Leone | EnglishSomalia | العربيةSouth Africa | EnglishSouth Sudan | EnglishSudan | العربيةSwaziland | EnglishTanzania | EnglishTogo | FrançaisTunisia | العربيةUganda | EnglishAsia Pacific
+Add
+
+Australia | EnglishBangladesh | বাংলাBrunei | Bahasa MelayuChina | 中文Hong Kong SAR | 中文East Timor | PortuguêsFiji | EnglishIndia (English) | EnglishIndia (Hindi) | हिन्दीIndonesia | Bahasa IndonesiaJapan | 日本語Kiribati | EnglishSouth Korea | 한국어Kyrgyzstan | РусскийMalaysia | Bahasa MelayuMarshall Islands | EnglishMicronesia | EnglishNew Zealand | EnglishPalau | EnglishPhilippines | EnglishPhilippines | TagalogSamoa | EnglishSingapore | EnglishSingapore | 中文Solomon Islands | EnglishTaiwan | 中文Thailand | ไทยTonga | EnglishTuvalu | EnglishVanuatu | EnglishVanuatu | FrançaisVietnam | Tiếng ViệtEurope
+Add
+
+Andorra | CatalàAndorra | FrançaisAustria | DeutschBelarus | РусскийBelgium | DutchBelgium | FrançaisBosnia and Herzegovina | HrvatskiCroatia | HrvatskiCyprus | ΕλληνικάCzech Republic | ČeštinaDenmark | DanskEstonia | РусскийEstonia | EestiFinland | SuomiFrance | FrançaisGermany | DeutschGreece | ΕλληνικάHungary | MagyarIreland | EnglishItaly | ItalianoLiechtenstein | DeutschLuxembourg | FrançaisMalta | EnglishMonaco | FrançaisNetherlands | NederlandsNorway | NorskPoland | PolskiPortugal | PortuguêsRomania | RomânăSan Marino | ItalianoSlovakia | SlovenčinaSpain | EspañolSpain | CatalàSweden | SvenskaSwitzerland | DeutschTurkey | TurkçeUkraine | УкраїнськаUnited Kingdom | EnglishState of Vatican City (Holy See) | ItalianoMiddle East
+Add
+
+Bahrain | العربيةIraq | العربيةIsrael | עִבְרִיתJordan | العربيةKuwait | العربيةLebanon | العربيةOman | العربيةPakistan | اردوPakistan | EnglishQatar | العربيةSaudi Arabia | العربيةSyria | العربيةUnited Arab Emirates | العربية
+Menu
+
+Weather ForecastsMy DashboardTodayHourlyDaily15 Day ForecastRadar & MapsInteractive Radar MapUS ForecastUS Satellite & RadarWorld SatelliteUS Severe AlertsUS HealthNews & MediaTop Weather StoriesHurricane CentralTornado CentralSafety & PrepSpace & SkywatchingVideosProducts & AccountAlexa SkillExternal Link
+Create an AccountSign inLifestyleAtmosphere ReviewsRecipesHome & GardenTravel & OutdoorsPets & AnimalsHealthAllergy TrackerAir Quality IndexCold & Flu TrackerSkin HealthMy DashboardTodayHourly10 Day15 DayWeekendMonthlyRadar
+Video
+
+VideoMore ForecastsMoreArrow down
+Specialty ForecastsYesterday's WeatherExternal Link
+Allergy TrackerCold & FluAir Quality ForecastAdvertisementAdvertisementAdvertisementTop Stories
+
+Will The Water Ever Return?Once full of water, this reservoir has since dried up.World Cup heat could be most dangerous in these citiesHeat Wave Sets New RecordsHome Insurance Disasters You’re Not Prepared ForDeadly Fungal Storms Sweeping The US
+Video
+
+See Tiny Kittens Rescued From Mississippi Tornado WreckageVideo
+This Major World Capital Is Sinking 10 Inches A YearVideo
+Lightning From Space? Storm Over Kansas Caught in OrbitVideo
+New Tick-Borne Illness Concern Is GrowingTrending
+
+Video
+
+storms/tornadoTornado hurls van 450 yards
+Video
+
+newsHuge wave crashes over condos in HawaiitravelTraveling? The heat may closing tourist attractions in Europe
+Video
+
+sports-recreationWorld Cup’s hidden opponents: Heat, altitude, travelAdvertisementWeather Today Across the Country
+
+AdvertisementAdvertisementLonely Planet
+
+Traveling soon? Here are the maps you needTraveling? The heat may closing tourist attractions in EuropeWhere in the world is ... Earth's Mars?8 underrated summer getaways with great weatherAdvertisementEditor's Pick
+Video
+
+How to protect yourself from bad air qualityAdvertisementSeasonal TipsSun standing still: The summer solsticeAdvertisementProduct Reviews & Deals
+
+17 popular sun shirts for the whole familyBest sunscreen of 2026: Our top 10 picksWhy you need a silk pillowcase (and our top picks)Fight the frizz: Best hair oils of 202612 travel essentials to stash in your carry-onLast Minute Mother’s Day Gifts That Can Still Arrive On TimeKeeping You Healthy
+
+Video
+
+How a walk in the woods can make you feel better
+Video
+
+Experts say new sunscreen ingredient makes them saferHeat wave poses extra risk for GLP-1 users
+Video
+
+Tick Safety For Pets Is More Than Just PreventionStay SafeAdvertisementAdvertisementFeedbackMissionCareersNews RoomAdvertise With UsTVWeather Data APIsTerms of UsePrivacy PolicyAdChoicesAd Choices
+Accessibility StatementData VendorsWe recognize our responsibility to use data and technology for good. We may use or share your data with our data vendors. Take control of your data. We gather your data to tailor the Services to you, understanding your likes and needs. Learn more about how we use this information to better serve you.Data PurposesData RightsThe Weather Channel is the world's most accurate forecaster according to ForecastWatch, Global and Regional Weather Forecast Accuracy Overview, 2021-2024, commissioned by The Weather Company.Weather Channel© The Weather Company, LLC 2026
+
+ Today Weather — Grokipedia
+ Search ⌘K Suggest Edit Sign in Sign in Overview Introduction Data Sources Availability and Distribution Features Core Forecasting Capabilities User Interface and Customization Widgets and Notifications Premium Features and Monetization Subscription Benefits Pricing and In-App Purchases Free vs. Premium Comparison Security and Safety Official Version Recommendations Risks of Modified APKs Reception User Ratings and Reviews Popularity and Usage Trends Criticisms and Common Complaints References Fact-checked by Grok 4 months ago Today Weather Ara Eve Leo Sal 
+1x
+ Today Weather, officially known as Today Weather: Data by NOAA/NWS, is a free Android weather forecasting application developed by todayweather.co that provides detailed local forecasts, radar imagery, severe weather alerts, and additional meteorological information using data from multiple sources, including the U.S. National Weather Service (weather.gov) for locations in the United States.[1][2]
+The app is exclusively available on the Google Play Store, where it has garnered over 1 million downloads and maintains a 4.6-star rating from more than 101,000 user reviews.[1] It features a simple, customizable user interface with support for widgets, Wear OS devices, air quality monitoring, UV index, pollen counts, sunrise/sunset times, and photo sharing overlaid with weather data.[1]
+To ensure accuracy, Today Weather aggregates data from numerous providers, including official national meteorological services such as Weather.gov (U.S. National Weather Service), the UK Met Office, ECMWF, and others depending on the location, alongside global sources like OpenWeatherMap and Apple WeatherKit.[1] Recent updates have added enhanced radar capabilities incorporating NOAA/NWS and OPERA data for improved coverage in the U.S. and Europe.[2]
+The application is free to download and use, though it contains advertisements and offers in-app purchases for premium features such as ad removal and enhanced access.[1] It emphasizes reliability through direct integration with official government weather data where available, setting it apart from apps that rely solely on commercial aggregators.[1]
+Overview
+Introduction
+Today Weather, officially known as Today Weather: Data by NOAA/NWS, is a free mobile weather forecasting application developed by todayweather.co and available on the Google Play Store for Android devices.[3] It provides accurate local weather forecasts through a simple and customizable interface, positioning itself as a user-friendly alternative in the weather app market.[3]
+The app's primary distinction lies in its direct use of official U.S. government meteorological data, particularly from the National Oceanic and Atmospheric Administration (NOAA) and the National Weather Service (NWS) via Weather.gov for United States locations.[3] This reliance on primary government sources contrasts with many competitors that depend on third-party aggregators, aiming to deliver reliable and precise forecasts.[3]
+While the app offers global coverage drawing from multiple sources including Apple WeatherKit, AccuWeather, and ECMWF, its emphasis on NOAA/NWS data for U.S. forecasts underscores its focus on authoritative information.[3] It is free to download with optional in-app purchases for premium features.[3]
+Data Sources
+Today Weather: Data by NOAA/NWS sources its weather forecasts for the United States from the National Weather Service (NWS), an agency of the National Oceanic and Atmospheric Administration (NOAA), via the official Weather.gov platform.[1] The app's name reflects this emphasis on official U.S. government meteorological data.[1]
+This direct reliance on NOAA/NWS distinguishes the app from those that primarily use commercial aggregators, as NWS produces the authoritative U.S. weather forecasts based on extensive observations, modeling, and expert analysis. The NWS data is considered highly reliable for U.S. locations due to its official status and rigorous validation processes.[1]
+NOAA/NWS information on Weather.gov is in the public domain, unless otherwise annotated, and may be used and redistributed freely without licensing fees or restrictions.[4] This public-domain status eliminates commercial intermediation for U.S. data, enabling direct access to unfiltered government forecasts that are free from third-party modifications or biases.[4]
+Availability and Distribution
+Today Weather, officially known as "Today Weather:Data by NOAA/NWS", is exclusively distributed through the Google Play Store for Android devices.[1] The app is available only on the Android platform, including support for Wear OS smartwatches, and is not officially released for iOS or other operating systems.[1][5]
+The application is free to download and install from the Google Play Store, where it has garnered over 1 million downloads and maintains a 4.6-star rating based on more than 100,000 reviews.[1] It includes advertisements and offers optional in-app purchases for enhanced features.[1] Official distribution occurs solely through the Google Play Store to ensure users receive authentic and up-to-date versions from the developer todayweather.co.[1][5]
+Features
+Core Forecasting Capabilities
+Today Weather delivers core forecasting capabilities by presenting accurate, timely weather information primarily sourced from the National Weather Service (NWS) and National Oceanic and Atmospheric Administration (NOAA) for U.S. locations.[3]
+Current conditions are prominently displayed, showing key metrics such as actual temperature, humidity, visibility, dew point, air pressure, wind speed, and wind direction.[3]
+The app provides 24/7 weather forecasts that include the chance of precipitation, supporting detailed hourly predictions of expected conditions throughout the day and night. Daily forecasts are also available, with notifications that summarize anticipated weather for upcoming days.[3]
+Basic radar functionality enables users to view precipitation patterns, as the radar locates ongoing precipitation, calculates its motion, estimates its type (such as rain, snow, or hail), and projects its future position and intensity. This integrates with map overlays to offer a visual representation of weather systems and their movement.[3]
+User Interface and Customization
+Today Weather features a beautiful and simple-to-use interface that prioritizes ease of navigation and visual clarity, presenting weather information in a well-organized and aesthetically pleasing layout. The app's design emphasizes intuitive graphs and displays that allow users to quickly gauge conditions at a glance.[1]
+Customization options enable users to personalize the in-app experience, including the ability to hide unwanted elements for a streamlined view tailored to individual preferences. A dark theme is available, which enhances readability with its clean and simple layout.[1]
+The app supports multiple locations through global search functionality, allowing users to add and switch between various places worldwide for location-based forecasts. This enables seamless access to accurate, location-specific weather data from official sources like NOAA and the NWS, with reliable location detection for automatic current-position updates.[1]
+Widgets and Notifications
+Today Weather offers a variety of highly customizable home screen widgets that enable users to access current conditions, forecasts, and other weather data directly from their device's home screen. These widgets include clock-integrated weather displays, radar visualizations, detailed weather charts, and a styled HTC clock weather widget, among numerous options that users can choose from. Customization extends to elements such as background colors, text styles, icons, and overall appearance, allowing personalization to suit individual preferences, with features like a manual refresh button for on-demand updates.[1]
+The app supports push notifications for timely weather updates, including daily forecast notifications that provide regular summaries of expected conditions. It also delivers alerts for severe weather warnings, rain and snow alarms that signal approaching precipitation, and other critical notifications to help users prepare for changing or hazardous weather. These features rely on the app's direct sourcing of data from NOAA and NWS for accuracy.[1]
+Premium Features and Monetization
+Subscription Benefits
+The premium subscription for Today Weather removes advertisements from the app, providing an uninterrupted and cleaner interface for viewing forecasts, radar, and other features. This ad-free experience eliminates banners and interruptions that appear in the free version.[3]
+The app offers in-app purchases, with user reports indicating a low-cost yearly plan (around $5). Specific additional benefits beyond ad removal are not explicitly detailed in official sources. The free version already includes access to multiple data sources (including NOAA/NWS), radar, severe alerts, and extensive widget customization.[3]
+Pricing and In-App Purchases
+Today Weather is provided free of charge and includes advertisements in its base version. The app offers in-app purchases to unlock premium features, such as ad removal and enhanced access.[1]
+User reports from the Google Play Store indicate that the premium option is available via a yearly plan typically priced around $5.[1]
+Exact pricing for these in-app purchases may vary by region, device, or over time, and is not explicitly detailed in the official app description beyond the general availability of paid upgrades. No one-time lifetime purchase or alternative billing models are prominently mentioned in authoritative sources.
+Free vs. Premium Comparison
+The Today Weather: Data by NOAA/NWS app provides a free version with access to its core functionality, including global and U.S.-specific weather data from sources like NOAA/NWS and others, detailed forecasts, radar, severe weather alerts, rain/snow alarms, customizable widgets, and daily notifications, though it includes advertisements.[1]
+The premium version, unlocked via in-app purchases, removes ads for an ad-free experience and may provide additional enhancements.[1]
+Free vs. Premium Feature Comparison
+FeatureFree VersionPremium Version
+AdvertisementsPresentRemoved
+Core forecasting (NOAA/NWS data, hourly/daily updates)YesYes
+Radar and precipitation trackingYesYes
+Severe weather warnings and alertsYesYes
+Customizable widgets (including clock, radar, and detailed charts)YesYes
+Air quality, UV index, pollen, sunrise/sunset infoYesYes
+The free version delivers reliable, government-sourced weather information suitable for everyday use, while premium enhances usability by eliminating advertisements.[1]
+Security and Safety
+Official Version Recommendations
+Users are strongly recommended to download and install Today Weather: Data by NOAA/NWS exclusively from the official Google Play Store page.[1]
+This ensures users obtain the authentic version of the app, which undergoes scanning by Google Play Protect to detect harmful behavior before installation and during ongoing use on the device.[6][7]
+Downloading from the official Google Play Store provides automatic updates, including critical security patches and feature improvements, helping maintain the app's reliability, performance, and compatibility over time.[8]
+It also enables direct access to official developer support through the Play Store listing, where users can contact the developer via the provided email address ([email protected]) for inquiries or assistance.[1]
+Using the official channel further ensures compliance with the app's terms of service and supports the developer's legitimate distribution model.[1]
+Risks of Modified APKs
+Modified APKs for Today Weather: Data by NOAA/NWS, commonly marketed as "premium unlocked" versions that bypass in-app purchases for ad removal and enhanced features, are widely distributed on third-party websites and forums outside the official Google Play Store. These unofficial modifications expose users to significant security threats due to their origins from unverified sources.
+Such altered files frequently contain malware, including trojans and adware, which can infect devices, steal personal information such as login credentials or financial data, and perform unauthorized actions like excessive data usage or device control. For instance, modified Android apps have been vectors for widespread infections, as seen with the Necro Trojan that targeted altered versions of popular applications and affected millions of users.[9][10]
+Security experts highlight that modded APKs from unknown sources substantially increase the risk of malware infection and data breaches, often introducing malicious code during the repackaging process.[11]
+Beyond malware, these versions can compromise device stability through compatibility issues or hidden background processes, and their use violates the application's terms of service, potentially resulting in denied access to legitimate updates or services. Users face heightened privacy and device integrity risks when installing these files, underscoring the importance of obtaining the app exclusively through official channels.
+Reception
+User Ratings and Reviews
+Today Weather: Data by NOAA/NWS has earned a strong average rating of 4.6 out of 5 stars on the Google Play Store, based on over 101,000 user reviews.[3] This high rating reflects broad user satisfaction with the app's performance and reliability.
+Users frequently praise the app for its accurate forecasts sourced directly from NOAA and NWS data, along with its clean, simple interface and features like dark mode. One representative review describes it as "the best weather app I ever used," highlighting the "phenomenal" dark theme, simple layout, and accurate data.[1] Such feedback underscores appreciation for the app's straightforward design and dependable official weather information.
+With a substantial volume of ratings, overall user sentiment remains predominantly positive, emphasizing the app's strengths in precision and usability.[3] The consistently high scores indicate effective fulfillment of core user expectations for a NOAA/NWS-based weather application.
+Popularity and Usage Trends
+Today Weather: Data by NOAA/NWS has achieved solid popularity on the Google Play Store, with over 1 million installs reported on its official listing and an Editors' Choice designation highlighting its quality recognition.[1]
+More granular analytics estimate the total number of downloads at approximately 2.9 million since its initial release in March 2017.[12]
+Recent activity shows consistent usage, with roughly 13,000 downloads over the past 30 days and an average of
+
+=== AI ===
+{"FINAL ANSWER": "I cannot provide the current weather without knowing your location. Please tell me where you are so I can give you accurate weather information.", "SUGGESTION": "Provide your current location; Search for weather in a specific city; Check a weather forecast for the upcoming week"}
+
+Chat saved at 2026-06-23 04:06:11
+=== Human ===
+Would it be raining today in Hong Kong?
+
+=== AI ===
+
+
+=== Tool ===
+Access Denied
+
+Access Denied
+ 
+You don't have permission to access "http://www.accuweather.com/en/hk/hong-kong-weather" on this server.
+Reference #18.88b82917.1782158766.b8c478e
+https://errors.edgesuite.net/18.88b82917.1782158766.b8c478e
+
+Hong Kong Observatory
+
+Skip Content
+
+ 
+ 
+
+Current Weather
+
+HKO
+
+The figure following symbols and are the forecast/recorded temperature at HKO on the day, and could be regarded as the range of temperature variation on that day.
+
+°C
+
+%
+
+Innovate with Science,Serve with Heart
+
+Current Weather
+
+Regional Weather
+
+Regional Weather
+ Temperature:
+Temperature
+Relative Humidity
+Max temp
+Min temp
+Yesterday's Max temp
+Yesterday's Min temp
+Past 24-hour Temperature Difference
+Hong Kong Heat Index
+Grass Temperature
+Maximum gust
+
+Mean Wind
+Past Hour Rainfall
+Visibility
+MSL pressure
+
+My Location Weather
+
+My Location Weather
+
+Location:
+Choose Your Location
+Chek Lap Kok
+Cheung Chau
+Happy Valley
+Hong Kong Observatory
+Hong Kong Park
+Kai Tak Runway Park
+Kau Sai Chau
+King's Park
+Kowloon City
+Kwun Tong
+Lau Fau Shan
+Ngong Ping
+Pak Tam Chung
+Peng Chau
+Sai Kung
+Sha Tin
+Sham Shui Po
+Shau Kei Wan
+Shek Kong
+Sheung Shui
+Stanley
+Ta Kwu Ling
+Tai Mei Tuk
+Tai Po
+The Peak
+Tseung Kwan O
+Tsing Yi
+Tsuen Wan Ho Koon
+Tsuen Wan Shing Mun Valley
+Tuen Mun
+Waglan Island
+Wetland Park
+Wong Chuk Hang
+Wong Tai Sin
+Yuen Long Park
+
+Note
+Note:
+
+The meteorological data displayed for “My Location Weather” for the user selected location is provided by nearby weather stations. In case meteorological data is not available from nearby stations, data from other meteorological stations at the Headquarters of the Observatory, King’s Park, and Star Ferry will be used instead.
+
+Tropical Cyclone Track
+
+Tropical Cyclone Track
+Tropical Cyclone Track
+
+Details GIS Version Track Probability
+
+Earth Weather
+
+Earth Weather
+
+Details
+
+Radar
+
+Radar
+
+Details
+
+Satellite
+
+Satellite
+
+Details
+
+World Weather
+
+World Weather
+
+Details
+
+Highlights
+
+Highlights
+
+Local Weather Forecast
+
+Weather Forecast
+
+▼Expand▲Collapse
+
+General Situation
+
+Outlook:
+
+9-Day Weather Forecast:
+General Situation
+
+More
+
+Extended Outlook
+
+Maximum Temperature
+Minimum Temperature
+Mean Sea Level Pressure
+Track Probability
+
+Day/Month
+
+Probability(%)
+
+Solid line :Climatological Mean
+Dotted lines :85th (upper) and 15th (lower) percentiles of climatological distribution
+
+Please click here for the detailed forecast for the 9 days in grey area
+
+Details
+Legends
+
+World Weather
+
+More
+
+Video
+
+ 
+
+ 
+
+More
+
+Weather Image
+
+Satellite Imagery
+
+Radar Image
+
+Lightning Location
+ 
+
+What's New
+
+HKO Updates
+
+Observatory's Blog
+
+Hong Kong Climate
+
+The figures in the chart are calculated based on max/min temperature and monthly rainfall data recorded at the HKO in that month in the 30 years from 1991 to 2020.
+
+Select Month:
+
+JanFebMarAprMayJunJulAugSepOctNovDecWholeYear
+
+Details
+
+Climate Highlight
+
+(up to )
+
+Mean Temp
+
+Mean Max Temp
+
+Mean Min Temp
+
+Total Rainfall
+mm
+
+So Far This year
+(up to )
+
+Absolute Max Temp
+
+Absolute Min Temp
+
+Max Daily Rainfall
+
+Accumulated Rainfall
+
+Climatology for next
+
+Festival: Solar Term: 
+
+Details
+
+Astro
+
+Sunrise
+
+Sunset
+
+Moonrise
+
+Moonset
+
+Moon Phase:
+
+Tide
+
+Quarry Bay
+17 Jun
+
+North Point Sea Surface Temp
+
+Earthquake
+Report felt tremor
+
+MagDate & Time, Location
+
+=== AI ===
+{"FINAL ANSWER": "I am sorry, I cannot provide real-time weather information. Please check a local weather forecast for Hong Kong.", "SUGGESTION": "Check Hong Kong Observatory website; Check AccuWeather for Hong Kong; Search for \"Hong Kong weather forecast\""}
+
+Chat saved at 2026-06-23 04:10:11
+=== Human ===
+Search online and tell me current weather in Hong Kong
+
+=== AI ===
+
+
+=== Tool ===
+Hong Kong Current Weather | AccuWeather
+
+ Go Back
+ 
+
+ For Business
+ 
+
+|
+
+ Warnings
+ 
+
+ Data Suite
+ 
+
+ Forensics
+ 
+
+ Advertising
+ 
+
+ Superior Accuracy™
+ 
+
+ settings
+ 
+
+ Help
+ 
+Kitanomarukoen, Tokyo Weather
+Today
+WinterCast
+Local {stormName} Tracker
+Hourly
+10-Day
+Radar
+MinuteCast®
+Monthly
+Air Quality
+Health & Activities
+
+Around the Globe
+
+Hurricane Tracker
+
+Severe Weather
+
+Radar & Maps
+
+News
+
+News & Features
+
+Astronomy
+
+Business
+
+Climate
+
+Health
+
+Recreation
+
+Sports
+
+Travel
+
+For Business
+
+Warnings
+
+Data Suite
+
+Forensics
+
+Advertising
+
+Superior Accuracy™
+
+Video
+
+ Location
+ 
+
+Chevron down
+
+Location
+
+News
+
+Videos
+
+Use your current location
+
+Recent Locations
+
+Kitanomarukoen, Japan
+
+Japan
+
+19° C
+
+RealFeel®
+18°
+
+Hong Kong Weather Radar
+See more 
+
+Static Radar Temporarily Unavailable
+Thank you for your patience as we work to get everything up and running again.
+Refresh Page
+
+ Hong Kong Weather Conditions
+ See more 
+
+Central and Western District
+
+29°
+
+Eastern District
+
+28°
+
+Hong Kong
+
+27°
+
+Hong Kong Island
+
+28°
+
+Kowloon
+
+28°
+
+Kowloon City
+
+28°
+
+Kwai Tsing
+
+27°
+
+Kwun Tong
+
+28°
+
+New Territories
+
+24°
+
+North District
+
+29°
+
+Sai Kung
+
+28°
+
+Sha Tin
+
+27°
+
+Sham Shui Po
+
+28°
+
+Southern District
+
+28°
+
+Tai Po
+
+24°
+
+Tin Shui Wai
+
+24°
+
+Tsuen Wan
+
+24°
+
+Tuen Mun
+
+24°
+
+Wong Tai Sin
+
+28°
+
+Yuen Long
+
+24°
+
+Weather News
+
+ See More 
+
+Why World Cup players are struggling in US heat
+
+8 hours ago
+
+Storm chasers use drone to give homeowners a view of extreme...
+
+3 days ago
+
+More than $4 billion in damage estimated from Tropical Storm...
+
+3 days ago
+
+Around the Globe
+
+Hurricane Tracker
+
+Severe Weather
+
+Radar & Maps
+
+News
+
+Video
+
+Top Stories
+
+Severe Weather
+Storms, flood threat persist across central US
+45 minutes ago
+
+Weather Forecasts
+Pattern change to bring cooler air, rain to Pacific Northwest
+3 hours ago
+
+Live Blog
+
+Live: World Cup 2026 weather updates
+
+LATEST ENTRY
+Storms delay entry for France vs. Iraq match in Philadelphia
+
+54 minutes ago
+
+Weather News
+Utah wildfires force evacuations as crews work in hot, windy weather
+3 hours ago
+
+Multiple tornadoes filmed during severe weather outbreak
+
+12 hours ago
+0:45
+
+More Stories
+
+Featured Stories
+
+Weather News
+Deadly heat grips France, western Europe faces extreme heat wave
+2 hours ago
+
+Astronomy
+Webb telescope captures ‘sparkling’ stars being born in new image
+1 hour ago
+
+Recreation
+Black bear injures teen on Washington trail
+4 days ago
+
+Astronomy
+Meteorological summer vs. astronomical summer explained
+4 days ago
+
+Health
+Pickle is the pumpkin spice of summer
+6 days ago
+
+World
+
+Asia
+
+Japan
+
+Tokyo
+
+Kitanomarukoen
+
+Company
+
+ Proven Superior Accuracy™
+ 
+
+ About AccuWeather
+ 
+
+ Digital Advertising
+ 
+
+ Careers
+ 
+
+ Press
+ 
+
+ Contact Us
+ 
+
+Products & Services
+
+ For Business
+ 
+
+ For Partners
+ 
+
+ For Advertising
+ 
+
+ AccuWeather APIs
+ 
+
+ AccuWeather Connect
+ 
+
+ Personal Weather Stations
+ 
+
+Apps & Downloads
+
+ iPhone App
+ 
+
+ Android App
+ 
+
+ See all Apps & Downloads
+ 
+
+Subscription Services
+
+ AccuWeather Premium
+ 
+
+ AccuWeather Professional
+ 
+
+More
+
+ AccuWeather Ready
+ 
+
+ Business
+ 
+
+ Health
+ 
+
+ Hurricane
+ 
+
+ Leisure and Recreation
+ 
+
+ Severe Weather
+ 
+
+ Space and Astronomy
+ 
+
+ Sports
+ 
+
+ Travel
+ 
+
+ Weather News
+ 
+
+Company
+
+ Proven Superior Accuracy™
+ 
+
+ About AccuWeather
+ 
+
+ Digital Advertising
+ 
+
+ Careers
+ 
+
+ Press
+ 
+
+ Contact Us
+ 
+
+Products & Services
+
+ For Business
+ 
+
+ For Partners
+ 
+
+ For Advertising
+ 
+
+ AccuWeather APIs
+ 
+
+ AccuWeather Connect
+ 
+
+ Personal Weather Stations
+ 
+
+Apps & Downloads
+
+ iPhone App
+ 
+
+ Android App
+ 
+
+ See all Apps & Downloads
+ 
+
+Subscription Services
+
+ AccuWeather Premium
+ 
+
+ AccuWeather Professional
+ 
+
+More
+
+ AccuWeather Ready
+ 
+
+ Business
+ 
+
+ Health
+ 
+
+ Hurricane
+ 
+
+ Leisure and Recreation
+ 
+
+ Severe Weather
+ 
+
+ Space and Astronomy
+ 
+
+ Sports
+ 
+
+ Travel
+ 
+
+ Weather News
+ 
+
+ © 2026 AccuWeather, Inc. "AccuWeather" and sun design are registered trademarks of AccuWeather, Inc. All Rights Reserved.
+
+ 
+
+ Terms of Use
+ 
+ |
+ 
+ Privacy Policy
+ 
+ |
+ 
+ Cookie Policy
+ 
+ |
+ 
+ Data Sources
+ 
+
+Hong Kong Observatory
+
+Skip Content
+
+ 
+ 
+
+Current Weather
+
+HKO
+
+The figure following symbols and are the forecast/recorded temperature at HKO on the day, and could be regarded as the range of temperature variation on that day.
+
+°C
+
+%
+
+Innovate with Science,Serve with Heart
+
+Current Weather
+
+Regional Weather
+
+Regional Weather
+ Temperature:
+Temperature
+Relative Humidity
+Max temp
+Min temp
+Yesterday's Max temp
+Yesterday's Min temp
+Past 24-hour Temperature Difference
+Hong Kong Heat Index
+Grass Temperature
+Maximum gust
+
+Mean Wind
+Past Hour Rainfall
+Visibility
+MSL pressure
+
+My Location Weather
+
+My Location Weather
+
+Location:
+Choose Your Location
+Chek Lap Kok
+Cheung Chau
+Happy Valley
+Hong Kong Observatory
+Hong Kong Park
+Kai Tak Runway Park
+Kau Sai Chau
+King's Park
+Kowloon City
+Kwun Tong
+Lau Fau Shan
+Ngong Ping
+Pak Tam Chung
+Peng Chau
+Sai Kung
+Sha Tin
+Sham Shui Po
+Shau Kei Wan
+Shek Kong
+Sheung Shui
+Stanley
+Ta Kwu Ling
+Tai Mei Tuk
+Tai Po
+The Peak
+Tseung Kwan O
+Tsing Yi
+Tsuen Wan Ho Koon
+Tsuen Wan Shing Mun Valley
+Tuen Mun
+Waglan Island
+Wetland Park
+Wong Chuk Hang
+Wong Tai Sin
+Yuen Long Park
+
+Note
+Note:
+
+The meteorological data displayed for “My Location Weather” for the user selected location is provided by nearby weather stations. In case meteorological data is not available from nearby stations, data from other meteorological stations at the Headquarters of the Observatory, King’s Park, and Star Ferry will be used instead.
+
+Tropical Cyclone Track
+
+Tropical Cyclone Track
+Tropical Cyclone Track
+
+Details GIS Version Track Probability
+
+Earth Weather
+
+Earth Weather
+
+Details
+
+Radar
+
+Radar
+
+Details
+
+Satellite
+
+Satellite
+
+Details
+
+World Weather
+
+World Weather
+
+Details
+
+Highlights
+
+Highlights
+
+Local Weather Forecast
+
+Weather Forecast
+
+▼Expand▲Collapse
+
+General Situation
+
+Outlook:
+
+9-Day Weather Forecast:
+General Situation
+
+More
+
+Extended Outlook
+
+Maximum Temperature
+Minimum Temperature
+Mean Sea Level Pressure
+Track Probability
+
+Day/Month
+
+Probability(%)
+
+Solid line :Climatological Mean
+Dotted lines :85th (upper) and 15th (lower) percentiles of climatological distribution
+
+Please click here for the detailed forecast for the 9 days in grey area
+
+Details
+Legends
+
+World Weather
+
+More
+
+Video
+
+ 
+
+ 
+
+More
+
+Weather Image
+
+Satellite Imagery
+
+Radar Image
+
+Lightning Location
+ 
+
+What's New
+
+HKO Updates
+
+Observatory's Blog
+
+Hong Kong Climate
+
+The figures in the chart are calculated based on max/min temperature and monthly rainfall data recorded at the HKO in that month in the 30 years from 1991 to 2020.
+
+Select Month:
+
+JanFebMarAprMayJunJulAugSepOctNovDecWholeYear
+
+Details
+
+Climate Highlight
+
+(up to )
+
+Mean Temp
+
+Mean Max Temp
+
+Mean Min Temp
+
+Total Rainfall
+mm
+
+So Far This year
+(up to )
+
+Absolute Max Temp
+
+Absolute Min Temp
+
+Max Daily Rainfall
+
+Accumulated Rainfall
+
+Climatology for next
+
+Festival: Solar Term: 
+
+Details
+
+Astro
+
+Sunrise
+
+Sunset
+
+Moonrise
+
+Moonset
+
+Moon Phase:
+
+Tide
+
+Quarry Bay
+17 Jun
+
+North Point Sea Surface Temp
+
+Earthquake
+Report felt tremor
+
+MagDate & Time, Location
+
+=== AI ===
+{"FINAL ANSWER": "The current weather in Hong Kong is 27 degrees Celsius. Some districts like Eastern District and Kowloon City are experiencing slightly warmer temperatures around 28 degrees Celsius, while areas like New Territories and Yuen Long are cooler at 24 degrees Celsius.", "SUGGESTION": "Check the humidity in Hong Kong; Check the wind speed in Hong Kong; Check the rainfall in Hong Kong"}
+
+Chat saved at 2026-06-23 20:18:40
+=== Human ===
+Who is Obama?
+
+=== AI ===
+
+
+=== Tool ===
+Presidency of Barack Obama - Wikipedia
+
+Jump to content
+
+Main menu
+
+Main menu
+move to sidebar
+hide
+
+ Navigation
+ 
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact us
+
+ Contribute
+ 
+
+HelpLearn to editCommunity portalRecent changesUpload fileSpecial pages
+
+Search
+
+Search
+
+Appearance
+
+Donate
+
+Create account
+
+Log in
+
+Personal tools
+
+Donate
+
+Create account
+
+Log in
+
+Contents
+move to sidebar
+hide
+
+(Top)
+
+1
+Major acts and legislation
+
+2
+Milestones
+
+Toggle Milestones subsection
+
+2.1
+2008 election
+
+2.2
+Transition period and inauguration
+
+2.3
+First 100 days
+
+3
+Administration
+
+Toggle Administration subsection
+
+3.1
+Cabinet
+
+3.2
+Notable non-Cabinet positions
+
+4
+Judicial appointments
+
+Toggle Judicial appointments subsection
+
+4.1
+United States Supreme Court nominations
+
+4.2
+Other courts
+
+5
+Domestic affairs
+
+Toggle Domestic affairs subsection
+
+5.1
+Health care reform
+
+5.2
+Wall Street reform
+
+5.3
+Climate change and the environment
+
+5.4
+Economy
+
+5.5
+Taxation
+
+5.6
+Budget and debt ceiling
+
+5.7
+LGBT rights
+
+5.8
+Education
+
+5.9
+Immigration
+
+5.10
+Energy
+
+5.11
+Drug policy and criminal justice reform
+
+5.12
+Gun control
+
+5.13
+Cybersecurity
+
+5.14
+Racial issues
+
+5.15
+NASA space policy
+
+5.16
+High tech initiatives
+
+6
+Foreign affairs
+
+Toggle Foreign affairs subsection
+
+6.1
+Iraq and Afghanistan
+
+6.2
+East Asia
+
+6.3
+Russia
+
+6.4
+Israel
+
+6.5
+Trade agreements
+
+6.6
+Guantanamo Bay detention camp
+
+6.7
+Killing of Osama bin Laden
+
+6.8
+Drone warfare
+
+6.9
+Cuban thaw
+
+6.10
+Iran
+
+6.11
+Arab Spring and its aftermath
+
+6.11.1
+Libya
+
+6.11.2
+Syrian civil war
+
+6.12
+Foreign and domestic surveillance
+
+7
+Ethics
+
+Toggle Ethics subsection
+
+7.1
+Lobbying reform
+
+7.2
+Transparency
+
+8
+Elections during the Obama presidency
+
+Toggle Elections during the Obama presidency subsection
+
+8.1
+2010 mid-term elections
+
+8.2
+2012 re-election campaign
+
+8.3
+2014 mid-term elections
+
+8.4
+2016 elections and transition period
+
+9
+Approval ratings and other opinions
+
+10
+See also
+
+11
+Notes
+
+12
+References
+
+13
+Further reading
+
+Toggle Further reading subsection
+
+13.1
+Foreign and military policy
+
+14
+External links
+
+Toggle the table of contents
+
+Presidency of Barack Obama
+
+17 languages
+
+العربيةAzərbaycancaΕλληνικάEspañolفارسیFrançaisItaliano한국어پښتوPortuguêsSimple EnglishSvenskaKiswahiliไทยУкраїнськаTiếng Việt中文
+
+Edit links
+
+ArticleTalk
+
+English
+
+Read
+
+View source
+
+View history
+
+Tools
+
+Tools
+move to sidebar
+hide
+
+ Actions
+ 
+
+Read
+
+View source
+
+View history
+
+ General
+ 
+
+What links hereRelated changesUpload filePermanent linkPage informationCite this pageGet shortened URL
+
+ Print/export
+ 
+
+Download as PDFPrintable version
+
+ In other projects
+ 
+
+Wikimedia CommonsWikidata item
+
+Appearance
+move to sidebar
+hide
+
+From Wikipedia, the free encyclopedia
+
+2009–2017 U.S. presidential administration
+For a chronological guide, see Timeline of the Barack Obama presidency.
+
+Official portrait, 2012Presidency of Barack ObamaJanuary 20, 2009 – January 20, 2017Vice PresidentJoe BidenCabinetFull listPartyDemocraticElection20082012SeatWhite House← George W. BushDonald Trump (I) →
+ Seal of the PresidentArchived websiteLibrary website
+
+This article is part of a series aboutBarack Obama
+
+Personal
+Early life and career
+Family
+Honors
+Public image
+Publications
+Dreams from My Father
+The Audacity of Hope
+A Promised Land
+Summer playlist
+Non-profit organizations
+Obama Foundation
+One America Appeal
+Speeches
+
+Illinois State Senator and U.S. Senator from Illinois
+Illinois State Senate tenure
+2004 DNC keynote address
+U.S. Senate tenure
+2004 election
+sponsored bills
+
+44th President of the United States
+Presidency
+timeline
+Transition
+Inaugurations
+first
+second
+Efforts to impeach
+Presidential library
+
+Tenure
+First 100 days
+Recovery Act
+Trips
+international
+Russia nuclear treaty
+Nobel Peace Prize
+Affordable Care Act
+Dodd–Frank
+Iraq withdrawal
+Killing of Osama bin Laden
+2011 debt-ceiling crisis
+Libya intervention
+Afghanistan withdrawal
+Benghazi attack
+2013 debt-ceiling crisis
+Anti-ISIL campaign
+Iraq
+Syria
+Tan suit controversy
+Iran nuclear deal
+Cuban thaw
+Sanctions against Russia
+Selma 50th anniversary speech
+Paris Agreement
+
+Policies
+Economic
+Energy
+Foreign
+Arctic
+Europe
+East Asia
+Middle East
+South Asia
+Obama Doctrine
+Pardons
+Marine
+Native
+Social
+Space
+
+Appointments
+Cabinet
+Judiciary
+Sotomayor
+Kagan
+Garland
+Supreme Court candidates
+
+Presidential campaigns
+2008
+election
+primaries
+convention
+debates
+Obama coalition
+2012
+election
+primaries
+convention
+debates
+
+vte
+Barack Obama's tenure as the 44th president of the United States began with his first inauguration on January 20, 2009, and ended on January 20, 2017. Obama, a Democrat from Illinois, took office after defeating the Republican nominee John McCain in the 2008 presidential election. Four years later, he won re-election in the 2012 presidential election, after defeating the Republican nominee Mitt Romney. Alongside Obama's presidency, the Democratic Party also held their majorities in the House of Representatives during the 111th U.S. Congress following the 2008 elections, thereby attained an overall federal government trifecta. Obama is the first African American president, the first multiracial president, the first non-white president,[a] and the first president born in Hawaii. Obama was constitutionally limited to two terms (the second re-elected Democrat President to be so) and was succeeded by Republican Donald Trump, who won the 2016 presidential election against Obama's preferred successor, Hillary Clinton. Historians and political scientists rank him among the upper tier in historical rankings of American presidents.
+Obama's accomplishments during the first 100 days of his presidency included signing the Lilly Ledbetter Fair Pay Act of 2009 relaxing the statute of limitations for equal-pay lawsuits;[2] signing into law the expanded Children's Health Insurance Program (S-CHIP); winning approval of a congressional budget resolution that put Congress on record as dedicated to dealing with major health care reform legislation in 2009; implementing new ethics guidelines designed to significantly curtail the influence of lobbyists on the executive branch; breaking from the Bush administration on a number of policy fronts, except for Iraq, in which he followed through on Bush's Iraq withdrawal of US troops;[3] supporting the UN declaration on sexual orientation and gender identity; and lifting the 7½-year ban on federal funding for embryonic stem cell research.[4] Obama also ordered the closure of the Guantanamo Bay detention camp, in Cuba, though it remains open. He lifted some travel and money restrictions to the island.[3]
+Obama signed many landmark bills into law during his first two years in office. The main reforms include: the Affordable Care Act, sometimes referred to as "the ACA" or "Obamacare", the Dodd–Frank Wall Street Reform and Consumer Protection Act, and the Don't Ask, Don't Tell Repeal Act of 2010. The American Recovery and Reinvestment Act and Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act served as economic stimuli amidst the Great Recession. After a lengthy debate over the national debt limit, he signed the Budget Control Act of 2011 and the American Taxpayer Relief Act of 2012. In foreign policy, he increased US troop levels in Afghanistan, reduced nuclear weapons with the United States–Russia New START treaty, and ended military involvement in the Iraq War. He gained widespread praise for ordering Operation Neptune Spear, the raid that killed Osama bin Laden, who was responsible for the September 11 attacks. In 2011, Obama ordered the drone-strike killing in Yemen of al-Qaeda operative Anwar al-Awlaki, who was an American citizen. He ordered military involvement in Libya in order to implement UN Security Council Resolution 1973, contributing to the overthrow of Muammar Gaddafi.
+After winning re-election by defeating Republican opponent Mitt Romney, Obama was sworn in for a second term on January 20, 2013. During this term, he condemned the 2013 Snowden leaks as unpatriotic, but called for more restrictions on the National Security Agency (NSA) to address privacy issues. Obama also promoted inclusion for LGBT Americans. His administration filed briefs that urged the Supreme Court to strike down same-sex marriage bans as unconstitutional (United States v. Windsor and Obergefell v. Hodges); same-sex marriage was legalized nationwide in 2015 after the Court ruled so in Obergefell. He advocated for gun control in response to the Sandy Hook Elementary School shooting, indicating support for a ban on assault weapons, and issued wide-ranging executive actions concerning global warming and immigration. In foreign policy, he ordered military interventions in Iraq and Syria in response to gains made by ISIL after the 2011 withdrawal from Iraq, promoted discussions that led to the 2015 Paris Agreement on global climate change, drew down US troops in Afghanistan in 2016, initiated sanctions against Russia following its annexation of Crimea and again after interference in the 2016 US elections, brokered the Joint Comprehensive Plan of Action nuclear deal with Iran, and normalized US relations with Cuba. Obama nominated three justices to the Supreme Court: Sonia Sotomayor and Elena Kagan were confirmed as justices, while Merrick Garland was denied hearings or a vote from the Republican-majority Senate.
+
+Major acts and legislation
+
+Economic policy actions
+
+Responding to the Great Recession
+American Recovery and Reinvestment Act of 2009
+Automotive industry bailout
+Wall Street reform
+Credit CARD Act of 2009
+Dodd–Frank Wall Street Reform and Consumer Protection Act
+Taxation and spending
+Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010
+Budget Control Act of 2011
+American Taxpayer Relief Act of 2012
+Bipartisan Budget Act of 2015
+2013 debt ceiling crisis and government shutdown
+Continuing Appropriations Act, 2014
+Bipartisan Budget Act of 2013
+Other domestic policy actions
+
+Healthcare reform
+Patient Protection and Affordable Care Act
+Health Care and Education Reconciliation Act of 2010
+Education
+Race to the Top competitive grant program
+Every Student Succeeds Act
+Climate change
+Clean Power Plan
+Immigration policy
+Deferred Action for Childhood Arrivals
+Deferred Action for Parents of Americans (blocked by Supreme Court)
+Social policy
+Lilly Ledbetter Fair Pay Act
+Matthew Shepard Act
+Don't Ask, Don't Tell Repeal Act of 2010
+Intelligence and surveillance policy
+Patriot Act extension (2011–2015)
+USA Freedom Act
+
+Timeline
+
+Congress
+
+Year
+
+111th[b]
+
+2009
+
+2010
+
+112th
+
+2011
+
+2012
+
+113th
+
+2013
+
+2014
+
+114th
+
+2015
+
+2016
+
+115th[b]
+
+2017
+
+Foreign policy actions
+
+Free trade agreements
+United States–Colombia Free Trade Agreement
+Panama–United States Trade Promotion Agreement
+South Korea–United States Free Trade Agreement
+Trans-Pacific Partnership (signed but not ratified)
+Arms control
+New START
+Climate change
+Paris Agreement
+Iraq
+Withdrawal of U.S. troops from Iraq
+American-led intervention in Iraq
+Afghanistan
+War in Afghanistan
+Withdrawal of U.S. troops from Afghanistan
+Rapprochement with Cuba and Iran
+Cuban thaw
+Joint Comprehensive Plan of Action with Iran
+Other military operations
+Drone strikes in Pakistan
+2011 military intervention in Libya
+Killing of Osama bin Laden
+Military intervention against ISIL
+Supreme Court nominations
+
+Sonia Sotomayor (confirmed)
+Elena Kagan (confirmed)
+Merrick Garland (not confirmed)
+
+Milestones
+2008 election
+Main articles: Barack Obama 2008 presidential campaign and 2008 United States presidential election
+Further information: 2008 United States elections, 2008 Democratic Party presidential primaries, and 2008 Democratic National Convention
+2008 Electoral College vote results
+Barack Obama announced his candidacy for the Democratic nomination in the 2008 presidential election on February 10, 2007.[5] In June 2008, Obama secured the Democratic nomination.[6] Obama selected Senator Joe Biden of Delaware as his running mate, and the two were officially nominated at the 2008 Democratic National Convention.
+On November 4, Obama was projected to have secured the presidency. Obama won the presidential election with 365 electoral votes and 52.9% of the popular vote, while John McCain received 173 electoral votes and 45.7% of the popular vote. In the concurrent congressional elections, Democrats secured a government trifecta after retaining their majorities in the House of Representatives and the Senate, and Speaker of the House Nancy Pelosi and Senate Majority Leader Harry Reid both remained in their posts. Republicans John Boehner and Mitch McConnell continued to serve as House Minority Leader and Senate Minority Leader, respectively.
+
+Transition period and inauguration
+Main articles: Presidential transition of Barack Obama and First inauguration of Barack Obama
+Official portrait, 2009Incumbent president George W. Bush and President-elect Obama on November 10, 2008.Chief Justice John Roberts administers the presidential oath of office to Obama at the Capitol, January 20, 2009.
+The presidential transition period began following Obama's victory in the 2008 U.S. presidential election, though Obama had chosen Chris Lu to begin planning for the transition in May 2008.[7] John Podesta, Valerie Jarrett, and Pete Rouse co-chaired the Obama-Biden Transition Project. During the transition period, Obama announced nominations for his cabinet and administration. In November 2008, Congressman Rahm Emanuel accepted Obama's offer to serve as White House Chief of Staff.[8]
+Obama was inaugurated on January 20, 2009, officially assuming the presidency at 12:00 pm, EST,[9] and completing the oath of office at 12:05 pm, EST. He delivered his inaugural address immediately following his oath.[10] Obama's transition team was highly complimentary of the Bush administration's outgoing transition team, particularly with regards to national security, and some elements of the Bush-Obama transition were later codified into law.[7]
+
+English Wikisource has original text related to this article:
+Barack Obama's First Inaugural Address
+
+First 100 days
+Main article: First 100 days of the Obama presidency
+
+Address Before a Joint Session of Congress (February 24, 2009) (52:20)
+
+The American Recovery and Reinvestmen
+
+Barack Obama - Wikipedia
+
+Jump to content
+
+Main menu
+
+Main menu
+move to sidebar
+hide
+
+ Navigation
+ 
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact us
+
+ Contribute
+ 
+
+HelpLearn to editCommunity portalRecent changesUpload fileSpecial pages
+
+Search
+
+Search
+
+Appearance
+
+Donate
+
+Create account
+
+Log in
+
+Personal tools
+
+Donate
+
+Create account
+
+Log in
+
+Contents
+move to sidebar
+hide
+
+(Top)
+
+1
+Early life and career
+
+Toggle Early life and career subsection
+
+1.1
+Education
+
+1.1.1
+College and research jobs
+
+1.1.2
+Community organizer and Harvard Law School
+
+1.1.3
+University of Chicago Law School
+
+1.2
+Family and personal life
+
+1.3
+Religious views
+
+2
+Legal career
+
+3
+Legislative career
+
+Toggle Legislative career subsection
+
+3.1
+Illinois Senate (1997–2004)
+
+3.2
+2004 U.S. Senate campaign in Illinois
+
+3.3
+U.S. Senate (2005–2008)
+
+4
+Presidential campaigns
+
+Toggle Presidential campaigns subsection
+
+4.1
+2008 presidential candidacy
+
+4.2
+2012 presidential candidacy
+
+5
+Presidency (2009–2017)
+
+Toggle Presidency (2009–2017) subsection
+
+5.1
+First 100 days
+
+5.2
+Domestic policy
+
+5.2.1
+Racial issues
+
+5.2.2
+LGBT rights
+
+5.2.2.1
+Same-sex marriage
+
+5.2.3
+Economic policy
+
+5.2.4
+Environmental policy
+
+5.2.5
+Health care reform
+
+5.3
+Foreign policy
+
+5.3.1
+Death of Osama bin Laden
+
+6
+Post-presidency (2017–present)
+
+7
+Cultural and political image
+
+Toggle Cultural and political image subsection
+
+7.1
+Job approval
+
+7.2
+Foreign perceptions
+
+8
+Legacy and recognition
+
+Toggle Legacy and recognition subsection
+
+8.1
+Presidential library
+
+8.2
+Awards and honors
+
+8.3
+Eponymy
+
+9
+Bibliography
+
+Toggle Bibliography subsection
+
+9.1
+Books
+
+9.2
+Audiobooks
+
+9.3
+Articles
+
+10
+See also
+
+Toggle See also subsection
+
+10.1
+Politics
+
+10.2
+Other
+
+10.3
+Lists
+
+11
+Notes
+
+12
+References
+
+Toggle References subsection
+
+12.1
+Bibliography
+
+13
+Further reading
+
+14
+External links
+
+Toggle External links subsection
+
+14.1
+Official
+
+14.2
+Other
+
+Toggle the table of contents
+
+Barack Obama
+
+254 languages
+
+АԥсшәаAcèhAfrikaansAlemannischአማርኛPangcahAragonésÆngliscالعربيةܐܪܡܝܐالدارجةمصرىঅসমীয়াAsturianuАварअवधीAymar aruAzərbaycancaتۆرکجهБашҡортсаBasa BaliBoarischŽemaitėškaBatak TobaBikol CentralБеларуская (тарашкевіца)БеларускаяBetawiБългарскиभोजपुरीBislamaBanjarBamanankanবাংলাབོད་ཡིགBrezhonegBosanskiБуряадCatalàChavacano de Zamboanga閩東語 / Mìng-dĕ̤ng-ngṳ̄НохчийнCebuanoᏣᎳᎩTsetsêhestâheseکوردیCorsuQırımtatarcaČeštinaСловѣньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟЧӑвашлаCymraegDanskDagbanliDeutschDagaareThuɔŋjäŋZazakiDolnoserbskiडोटेलीދިވެހިބަސްΕλληνικάEmiliàn e rumagnòlEsperantoEspañolEestiEuskaraEstremeñuفارسیFulfuldeSuomiFøroysktFɔ̀ngbèFrançaisArpetanNordfriiskFurlanFryskGaeilge贛語GàidhligGalegoAvañe'ẽगोंयची कोंकणी / Gõychi Konknni𐌲𐌿𐍄𐌹𐍃𐌺ગુજરાતીGungbeGaelgHausa客家語 / Hak-kâ-ngîHawaiʻiעבריתहिन्दीFiji HindiHrvatskiHornjoserbsceKreyòl ayisyenMagyarՀայերենԱրեւմտահայերէնInterlinguaBahasa IndonesiaInterlingueIgboIñupiatunIlokanoIdoÍslenskaItalianoᐃᓄᒃᑎᑐᑦ / inuktitut日本語La .lojban.JawaქართულიQaraqalpaqshaTaqbaylitKarai-karaiKabɩyɛGĩkũyũҚазақшаភាសាខ្មែរಕನ್ನಡ한국어Къарачай-малкъарکٲشُرRipoarischKurdîKernowekКыргызчаLatinaLadinoLëtzebuergeschLingua Franca NovaLimburgsLigureLombardLingálaລາວLietuviųLatgaļuLatviešuMadhurâमैथिलीBasa BanyumasanMalagasyОлык марийMāoriМакедонскиമലയാളംМонголमराठीBahasa MelayuMaltiမြန်မာဘာသာЭрзяньمازِرونیNapulitanoNedersaksiesPlattdüütschनेपालीनेपाल भाषाLi NihaNederlandsNorsk nynorskNorsk bokmålߒߞߏNouormandSesotho sa LeboaDiné bizaadChi-ChewaOccitanଓଡ଼ିଆИронਪੰਜਾਬੀPangasinanKapampanganPapiamentuDeitschPolskiPiemontèisپنجابیپښتوPortuguêsRuna SimiRumantschRomani čhibRomânăTarandíneРусскийРусиньскыйIkinyarwandaसंस्कृतम्Саха тылаᱥᱟᱱᱛᱟᱲᱤSarduSicilianuScotsسنڌيDavvisámegiellaSrpskohrvatski / српскохрватскиTaclḥitසිංහලSimple EnglishSlovenčinaSlovenščinaAnarâškielâSoomaaligaShqipСрпски / srpskiSranantongoSiSwatiSesothoSeelterskSundaSvenskaKiswahiliŚlůnskiதமிழ்తెలుగుTetunТоҷикӣไทยትግሬTürkmençeTagalogTolışiToki ponaTok PisinTürkçeТатарча / tatarçaReo tahitiئۇيغۇرچە / UyghurcheУкраїнськаاردوOʻzbekcha / ўзбекчаVènetoVepsän kel’Tiếng ViệtWest-VlamsVolapükWalonWinaray吴语IsiXhosaმარგალურიייִדישYorùbáVahcuenghZeêuwsⵜⴰⵎⴰⵣⵉⵖⵜ ⵜⴰⵏⴰⵡⴰⵢⵜ閩南語 / Bân-lâm-gí粵語中文IsiZulu
+
+Edit links
+
+ArticleTalk
+
+English
+
+Read
+
+View source
+
+View history
+
+Tools
+
+Tools
+move to sidebar
+hide
+
+ Actions
+ 
+
+Read
+
+View source
+
+View history
+
+ General
+ 
+
+What links hereRelated changesUpload filePermanent linkPage informationCite this pageGet shortened URL
+
+ Print/export
+ 
+
+Download as PDFPrintable version
+
+ In other projects
+ 
+
+Wikimedia CommonsWikinewsWikiquoteWikisourceWikidata item
+
+Appearance
+move to sidebar
+hide
+
+From Wikipedia, the free encyclopedia
+
+President of the United States from 2009 to 2017
+Several terms redirect here. For other uses, see Barack (disambiguation), Obama (disambiguation), and Barack Obama (disambiguation).
+
+Barack ObamaOfficial portrait, 201244th President of the United StatesIn officeJanuary 20, 2009 – January 20, 2017Vice PresidentJoe BidenPreceded byGeorge W. BushSucceeded byDonald TrumpUnited States Senatorfrom IllinoisIn officeJanuary 3, 2005 – November 16, 2008Preceded byPeter FitzgeraldSucceeded byRoland BurrisMember of the Illinois Senatefrom the 13th districtIn officeJanuary 8, 1997 – November 4, 2004Preceded byAlice PalmerSucceeded byKwame Raoul
+Personal detailsBornBarack Hussein Obama II (1961-08-04) August 4, 1961 (age 64)Honolulu, Hawaii, U.S.PartyDemocraticSpouse
+Michelle Robinson ​(m. 1992)​Children2ParentsBarack Obama (father)Ann Dunham (mother)RelativesObama familyEducationColumbia University (BA)Harvard University (JD)AwardsFull listSignatureWebsiteOfficial websiteObama FoundationWhite House Archives
+
+Obama's voice
+
+Obama on the death of Osama bin LadenRecorded May 2, 2011
+
+This article is part of a series aboutBarack Obama
+
+Personal
+Early life and career
+Family
+Honors
+Public image
+Publications
+Dreams from My Father
+The Audacity of Hope
+A Promised Land
+Summer playlist
+Non-profit organizations
+Obama Foundation
+One America Appeal
+Speeches
+
+Illinois State Senator and U.S. Senator from Illinois
+Illinois State Senate tenure
+2004 DNC keynote address
+U.S. Senate tenure
+2004 election
+sponsored bills
+
+44th President of the United States
+Presidency
+timeline
+Transition
+Inaugurations
+first
+second
+Efforts to impeach
+Presidential library
+
+Tenure
+First 100 days
+Recovery Act
+Trips
+international
+Russia nuclear treaty
+Nobel Peace Prize
+Affordable Care Act
+Dodd–Frank
+Iraq withdrawal
+Killing of Osama bin Laden
+2011 debt-ceiling crisis
+Libya intervention
+Afghanistan withdrawal
+Benghazi attack
+2013 debt-ceiling crisis
+Anti-ISIL campaign
+Iraq
+Syria
+Tan suit controversy
+Iran nuclear deal
+Cuban thaw
+Sanctions against Russia
+Selma 50th anniversary speech
+Paris Agreement
+
+Policies
+Economic
+Energy
+Foreign
+Arctic
+Europe
+East Asia
+Middle East
+South Asia
+Obama Doctrine
+Pardons
+Marine
+Native
+Social
+Space
+
+Appointments
+Cabinet
+Judiciary
+Sotomayor
+Kagan
+Garland
+Supreme Court candidates
+
+Presidential campaigns
+2008
+election
+primaries
+convention
+debates
+Obama coalition
+2012
+election
+primaries
+convention
+debates
+
+vte
+
+Barack Hussein Obama II[a] (born August 4, 1961) is an American politician who served as the 44th president of the United States from 2009 to 2017. A member of the Democratic Party, he was the first African American to serve as president. Obama represented Illinois in the United States Senate from 2005 to 2008 and served as an Illinois state senator from 1997 to 2004.
+Born in Honolulu, Obama graduated from Columbia University in 1983 and later worked as a community organizer in Chicago. In 1988, Obama enrolled at Harvard Law School, where he was the first Black president of the Harvard Law Review. He became a civil rights attorney and an academic, teaching constitutional law at the University of Chicago Law School from 1992 to 2004. In 1996, Obama was elected to represent the 13th district in the Illinois Senate, a position he held until 2004, when he successfully ran for the U.S. Senate. In the 2008 presidential election, after a close primary campaign against Hillary Clinton, he was nominated by the Democratic Party for president. Obama selected Joe Biden as his running mate and defeated Republican nominee John McCain and his running mate Sarah Palin.
+Obama was awarded the 2009 Nobel Peace Prize for efforts in international diplomacy, a decision that drew both praise and criticism. During his first term, his administration responded to the 2008 financial crisis with measures including the American Recovery and Reinvestment Act of 2009 to address the Great Recession; a partial extension of the Bush tax cuts; legislation to reform health care; and the Dodd–Frank Wall Street Reform and Consumer Protection Act, a major financial regulation reform bill. Obama also appointed Supreme Court justices Sonia Sotomayor and Elena Kagan, the former being the first Hispanic American on the Supreme Court. Obama also oversaw the end of the Iraq War and ordered Operation Neptune Spear, the raid that killed Osama bin Laden, who was the leader of al-Qaeda and was responsible for the September 11 attacks. He downplayed Bush's counterinsurgency model by expanding air strikes and making extensive use of special forces, while encouraging greater reliance on host-government militaries. Obama also ordered the 2011 military intervention in Libya to implement United Nations Security Council Resolution 1973, which contributed to the overthrow of Muammar Gaddafi.
+Obama defeated Republican opponent Mitt Romney and his running mate Paul Ryan in the 2012 presidential election. In his second term, Obama advocated for gun control in the wake of the Sandy Hook Elementary School shooting, took steps to combat climate change by signing the Paris Agreement on climate change and an executive order to limit carbon emissions, and presided over the implementation of the Affordable Care Act and other legislation passed during his first term. Obama also initiated sanctions against Russia following its invasion in Ukraine and again after Russian interference in the 2016 U.S. elections. He ordered military intervention in Iraq after gains made by ISIL following the 2011 withdrawal from Iraq, negotiated the Joint Comprehensive Plan of Action (a nuclear agreement with Iran), and normalized relations with Cuba. The number of American soldiers in Afghanistan decreased during Obama's second term, though U.S. soldiers remained in the country throughout his presidency. He also promoted inclusion for LGBTQ Americans, becoming the first sitting U.S. president to publicly support same-sex marriage.
+Obama left office in 2017. He remains politically active, campaigning for candidates in American elections, including in Biden's successful presidential bid in the 2020 presidential election. Outside politics, Obama has published three books: Dreams from My Father (1995), The Audacity of Hope (2006), and A Promised Land (2020). His presidential center, on the South Side of Chicago opened in June 2026. Historians and political scientists rank Obama highly in historical rankings of U.S. presidents.
+
+Early life and career
+Main article: Early life and career of Barack Obama
+Obama (right) with grandfather Stanley Armour Dunham, mother Ann Dunham, and half-sister Maya Soetoro, mid-1970s in Honolulu
+Barack Hussein Obama II was born on August 4, 1961,[2][3][4][5] at Kapiolani Medical Center for Women and Children in Honolulu, Hawaii.[6][7][8][9] He is the only president born outside the contiguous United States.[10] He was born to an 18-year-old American mother and a 27-year-old Kenyan father. His mother, Stanley Ann Dunham (1942–1995), was born in Wichita, Kansas, and was of English, Welsh, German, Swiss, and Irish descent. In 2007 it was discovered her great-great-grandfather Falmouth Kearney emigrated from the village of Moneygall, Ireland to the U.S. in 1850.[11] In July 2012, Ancestry.com found a strong likelihood that Dunham was descended from John Punch, an enslaved African man who lived in the Colony of Virginia during the seventeenth century.[12][13][14] Obama has described the ancestors of his grandparents as Scotch-Irish mostly.[15] Obama's father, Barack Hussein Obama (1934–1982),[16] was a married[17][18][19] Luo Kenyan from Nyang'oma Kogelo.[17][20] His last name, Obama, was derived from his Luo descent.[21] Obama's parents met in 1960 in a Russian language class at the University of Hawaiʻi at Mānoa, where his father was a foreign student on a scholarship.[22][23] The couple married in Wailuku, Hawaii, on February 2, 1961, six months before Obama was born.[24][25]
+In late August 1961, a few weeks after he was born, Barack and his mother moved to the University of Washington in Seattle, where they lived for a year. During that time, Barack's father completed his undergraduate degree in economics in Hawaii, graduating in June 1962. He left to attend graduate school on a scholarship at Harvard University, where he earned a Master of Arts in economics. Obama's parents divorced in March 1964.[26] Obama Sr. returned to Kenya in 1964, where he married for a third time and worked for the Kenyan government as the senior economic analyst in the Ministry of Finance.[27][page needed] He visited his son in Hawaii only once, at Christmas 1971,[28] before he was killed in an automobile accident in 1982, when Obama was 21 years old.[29] Recalling his early childhood, Obama said: "That my father looked nothing like the people around me—that he was black as pitch, my mother white as milk—barely registered in my mind."[23] He described his struggles as a young adult to reconcile social perceptions of his multiracial heritage.[30]
+In 1963, Dunham met Lolo Soetoro at the University of Hawaiʻi; he was an Indonesian East–West Center graduate student in geography. The couple married on Molokai on March 15, 1965.[31] After two one-year extensions of his J-1 visa, Lolo returned to Indonesia in 1966. His wife and stepson followed sixteen months later in 1967. The family initially lived in the Menteng Dalam neighborhood in the Tebet district of South Jakarta. From 1970, they lived in a wealthier neighborhood in the Menteng district of Central Jakarta.[32]
+
+Education
+Obama's Indonesian school record in St. Francis of Assisi Catholic Elementary School. He was enrolled as "Barry Soetoro" (no. 1), and wrongly recorded as an Indonesian citizen (no. 3) and a Muslim (
+
+=== AI ===
+{"FINAL ANSWER": "Barack Obama was the 44th president of the United States, serving from 2009 to 2017. He was the first African American president. Before his presidency, he was a U.S. Senator from Illinois and an Illinois state senator. He was awarded the 2009 Nobel Peace Prize.", "SUGGESTION": "Learn more about Obama's presidency; Research Obama's early life and career; Explore Obama's post-presidency activities"}
+
