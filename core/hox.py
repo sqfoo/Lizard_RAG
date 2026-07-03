@@ -1,4 +1,8 @@
-import json, uuid, time
+import json
+import uuid 
+import time
+import re
+import random
 from datetime import datetime
 from typing import TypedDict, Literal, Annotated, List
 
@@ -38,7 +42,8 @@ class Hox:
         helper_agents: dict[str, Agent],
         validate_agent: Agent,
         central_template: str,
-        validate_template: str
+        validate_template: str,
+        thread: str = None
     ):
 
         self.central = central_agent
@@ -51,7 +56,7 @@ class Hox:
         print('Building Hox System ... ...')
         self.graph = self._build_graph()
         self.history = []
-        self.set_thread(str(uuid.uuid4()))
+        self.set_thread(str(uuid.uuid4()) if thread is None else thread)
 
 
     # --------------------------------------------------------
@@ -103,8 +108,12 @@ class Hox:
                 'response': response
             }
         )
+        match = re.search(r"```(?:json)?\s*(.*?)\s*```", response, re.DOTALL)
 
-        resp = json.loads(response)
+        if match:
+            resp = json.loads(match.group(1))
+        else:
+            resp = json.loads(response)
 
         next = resp.get('NEXT', 'END')
 
@@ -127,6 +136,7 @@ class Hox:
         else:
             print(f'Call {helper} to run {task} ... ')
         
+        time.sleep(BASE_WAIT * random.uniform(0, 1.0))
         return {
             "history": history,
             "next_node": helper,
@@ -152,6 +162,7 @@ class Hox:
             }
         )
 
+        time.sleep(BASE_WAIT * random.uniform(0, 1.0))
         return {
             "helper_output": result,
             "history": state["history"] + [
@@ -179,7 +190,8 @@ class Hox:
                 'response': validation
             }
         )
-
+        
+        time.sleep(BASE_WAIT * random.uniform(0, 1.0))
         return {
             "validation_output": validation.upper(),
             "history": state["history"] + [

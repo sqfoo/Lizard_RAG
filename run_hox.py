@@ -1,5 +1,5 @@
+import argparse
 from dotenv import load_dotenv
-import time
 from datetime import datetime
 
 
@@ -23,60 +23,68 @@ from core.database import database
 from core.templates import CENTRAL_TEMPLATE, VALIDATE_TEMPLATE
 from core.prompts import COORDINATOR_PROMPT, VALIDATE_PROMPT, HELPER_PROMPT
 
-central_agent = Agent(
-    primary_LLM=GEMINI,
-    backup_LLM=HUGGINGFACE,
-    tools=[duckduck_websearch,],
-    sys_prompt=COORDINATOR_PROMPT
-)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="A sample tool")
+    parser.add_argument("--thread", type=str, default=None, help="Thread ID to save your chat with Agent")
+    parser.add_argument("--dir", type=str, default='chats', help="Directory to save chat history")
+    args = parser.parse_args()
 
-validate_agent = Agent(
-    primary_LLM=GEMINI,
-    backup_LLM=HUGGINGFACE,
-    tools=[duckduck_websearch, run_python, multiply, add, subtract, divide, fetch_existing_data],
-    sys_prompt=VALIDATE_PROMPT
-)
-
-helpers = {
-    'assistant': Agent(
+    central_agent = Agent(
         primary_LLM=GEMINI,
         backup_LLM=HUGGINGFACE,
-        tools=[
-            duckduck_websearch,
-            visit_webpage,
-            youtube_viewer,
-            image_caption,
-            run_python,
-            multiply,
-            add,
-            subtract,
-            divide,
-            upload_new_source,
-            fetch_existing_data
-        ],
-        sys_prompt=HELPER_PROMPT
+        tools=[duckduck_websearch,],
+        sys_prompt=COORDINATOR_PROMPT
     )
-}
 
-hox = Hox(
-    central_agent=central_agent,
-    helper_agents=helpers,
-    validate_agent=validate_agent,
-    central_template=CENTRAL_TEMPLATE,
-    validate_template=VALIDATE_TEMPLATE
-)
-hox.visualize()
+    validate_agent = Agent(
+        primary_LLM=GEMINI,
+        backup_LLM=HUGGINGFACE,
+        tools=[duckduck_websearch, run_python, multiply, add, subtract, divide, fetch_existing_data],
+        sys_prompt=VALIDATE_PROMPT
+    )
 
-keep = True
+    helpers = {
+        'assistant': Agent(
+            primary_LLM=GEMINI,
+            backup_LLM=HUGGINGFACE,
+            tools=[
+                duckduck_websearch,
+                visit_webpage,
+                youtube_viewer,
+                image_caption,
+                run_python,
+                multiply,
+                add,
+                subtract,
+                divide,
+                upload_new_source,
+                fetch_existing_data
+            ],
+            sys_prompt=HELPER_PROMPT
+        )
+    }
 
-while keep:
-    keep = input("Keep Running?") in ['Y', 'y', 'Yes', 'yes']
-    input_message = input("Human Message: ")
+    hox = Hox(
+        central_agent=central_agent,
+        helper_agents=helpers,
+        validate_agent=validate_agent,
+        central_template=CENTRAL_TEMPLATE,
+        validate_template=VALIDATE_TEMPLATE,
+        thread=args.thread
 
-    resp = hox(input_message)
-    print(f'Agent Response: {resp}')
-    print('-'*20)
+    )
+    hox.visualize()
 
-hox.save_chat('chats')
+    keep = True
 
-database.save()
+    while keep:
+        keep = input("Keep Running?") in ['Y', 'y', 'Yes', 'yes']
+        input_message = input("Human Message: ")
+
+        resp = hox(input_message)
+        print(f'Agent Response: {resp}')
+        print('-'*20)
+
+    hox.save_chat(args.dir)
+
+    database.save()

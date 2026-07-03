@@ -1,11 +1,16 @@
 import os
 import re
+import ta
 import time
+import json
 import requests
 import random
 import pandas as pd
+from pandas import DataFrame
 from typing import List
 from dotenv import load_dotenv
+import yfinance as yf
+from pydantic import BaseModel, Field
 
 from google import genai
 from google.genai import types
@@ -299,3 +304,248 @@ def fetch_existing_data(query: str) -> str:
     """
     serialized, retrieved_docs = database.retrieve(query)
     return serialized, retrieved_docs
+
+from typing import Dict, List
+
+import pandas as pd
+import ta
+import yfinance as yf
+from langchain_core.tools import tool
+
+
+# ============================================================================
+# Internal Helpers
+# ============================================================================
+
+def _get_history(
+    symbol: str,
+    period: str = "1y",
+    interval: str = "1d",
+) -> pd.DataFrame:
+    """Download historical OHLCV data."""
+
+    return yf.Ticker(symbol).history(
+        period=period,
+        interval=interval,
+    )
+
+
+def _compute_technical_indicators(df: pd.DataFrame) -> pd.DataFrame:
+    """Compute common technical indicators."""
+
+    df = df.copy()
+
+    df["SMA20"] = ta.trend.sma_indicator(df["Close"], window=20)
+    df["EMA20"] = ta.trend.ema_indicator(df["Close"], window=20)
+
+    df["RSI"] = ta.momentum.rsi(df["Close"])
+
+    df["MACD"] = ta.trend.macd(df["Close"])
+
+    df["ADX"] = ta.trend.adx(
+        df["High"],
+        df["Low"],
+        df["Close"],
+    )
+
+    return df
+
+
+def _df_to_records(df: pd.DataFrame) -> List[Dict]:
+    """Convert DataFrame into JSON serializable records."""
+
+    if df.empty:
+        return []
+
+    df = df.copy()
+
+    if isinstance(df.index, pd.DatetimeIndex):
+        df = df.reset_index()
+
+    return df.where(pd.notnull(df), None).to_dict(orient="records")
+
+
+# ============================================================================
+# Tools
+# ============================================================================
+
+@tool
+def get_historical_prices(
+    symbol: str,
+    period: str = "1y",
+    interval: str = "1d",
+) -> List[Dict]:
+    """
+    Download historical OHLCV data.
+
+    Returns:
+        List of daily (or interval) price records.
+    """
+
+    df = _get_history(symbol, period, interval)
+
+    return _df_to_records(df)
+
+
+@tool
+def get_company_fundamentals(symbol: str) -> Dict:
+    """
+    Retrieve the company's fundamental metrics.
+    """
+
+    info = yf.Ticker(symbol).info
+
+    keys = [
+        "longName",
+        "sector",
+        "industry",
+        "marketCap",
+        "trailingPE",
+        "forwardPE",
+        "priceToBook",
+        "beta",
+        "dividendYield",
+        "returnOnEquity",
+        "profitMargins",
+        "currentRatio",
+        "debtToEquity",
+        "earningsGrowth",
+        "revenueGrowth",
+    ]
+
+    return {
+        key: info.get(key)
+        for key in keys
+    }
+
+
+@tool
+def get_financial_statements(symbol: str) -> Dict:
+    """
+    Retrieve the latest financial statements.
+    """
+
+    ticker = yf.Ticker(symbol)
+
+    return {
+        "income_statement": _df_to_records(
+            ticker.financials
+        ),
+        "balance_sheet": _df_to_records(
+            ticker.balance_sheet
+        ),
+        "cash_flow": _df_to_records(
+            ticker.cashflow
+        ),
+    }
+
+
+@tool
+def get_dividend_history(symbol: str) -> List[Dict]:
+    """
+    Retrieve dividend payment history.
+    """
+
+    dividends = yf.Ticker(symbol).dividends.to_frame(
+        name="Dividend"
+    )
+
+    return _df_to_records(dividends)
+
+
+@tool
+def get_market_indices() -> Dict:
+    """
+    Retrieve recent market index performance.
+    """
+
+    symbols = {
+        "S&P500": "^GSPC",
+        "NASDAQ": "^IXIC",
+        "DOW": "^DJI",
+        "RUSSELL2000": "^RUT",
+        "VIX": "^VIX",
+    }
+
+    result = {}
+
+    for name, ticker in symbols.items():
+
+        history = yf.Ticker(ticker).history(period="5d")
+
+        result[name] = _df_to_records(history)
+
+    return result
+
+
+@tool
+def run_technical_analysis(
+    symbol: str,
+    period: str = "1y",
+    interval: str = "1d",
+) -> Dict:
+    """
+    Compute technical indicators for the specified stock.
+
+    Returns only the latest indicator values together with
+    recent price history.
+    """
+
+    df = _get_history(
+        symbol=symbol,
+        period=period,
+        interval=interval,
+    )
+
+    if df.empty:
+        return {
+            "symbol": symbol,
+            "error": "No historical data available.",
+        }
+
+    df = _compute_technical_indicators(df)
+
+    latest = df.iloc[-1]
+
+    return {
+        "symbol": symbol.upper(),
+
+        "latest_price": float(latest["Close"]),
+
+        "technical_indicators": {
+            "SMA20": float(latest["SMA20"]) if pd.notna(latest["SMA20"]) else None,
+            "EMA20": float(latest["EMA20"]) if pd.notna(latest["EMA20"]) else None,
+            "RSI": float(latest["RSI"]) if pd.notna(latest["RSI"]) else None,
+            "MACD": float(latest["MACD"]) if pd.notna(latest["MACD"]) else None,
+            "ADX": float(latest["ADX"]) if pd.notna(latest["ADX"]) else None,
+        },
+
+        "recent_prices": _df_to_records(df.tail(30)),
+    }
+
+@tool
+def stock_news(stock: str) -> str:
+    """
+    Fetch the news related to that stock
+
+    Args:
+        stock: str
+
+    Returns:
+        str: news related to stock
+    
+    """
+    return duckduck_websearch(f'Today {stock}')
+
+@tool
+def fetch_news() -> str:
+    """
+    Fetch the current news
+
+    Args:
+
+    Returns:
+        str: news related to stock
+    
+    """
+    return duckduck_websearch(f'Today News')

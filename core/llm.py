@@ -16,7 +16,7 @@ HUGGINGFACE = {
     'param':{
         'repo_id': "Qwen/Qwen2.5-7B-Instruct",
         'task': 'text-generation',
-        'max_new_tokens': 1024,
+        'max_new_tokens': 4096,
         'do_sample': False,
         'repetition_penalty': 1.03,
         'provider': 'auto',
@@ -29,7 +29,7 @@ HUGGINGFACE_LITE = {
     'param':{
         'repo_id': "Qwen/Qwen2.5-1.5B-Instruct",
         'task': 'text-generation',
-        'max_new_tokens': 1024,
+        'max_new_tokens': 4096,
         'do_sample': False,
         'repetition_penalty': 1.03,
         'provider': 'auto',
@@ -41,7 +41,7 @@ GEMINI = {
     "type": "gemini",
     "param": {
         "model": "gemini-2.5-flash",
-        "max_tokens": 1024,
+        "max_tokens": 4096,
         "max_retries": 0,
         "timeout": 0.0
     }
@@ -51,7 +51,7 @@ GEMINI_LITE = {
     "type": "gemini-lite",
     "param": {
         "model": "gemini-2.5-flash-lite",
-        "max_tokens": 1024,
+        "max_tokens": 4096,
         "max_retries": 0,
         "timeout": 0.0
     }
