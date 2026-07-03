@@ -32,21 +32,11 @@ In **HOX**, we make use of the coordination among a ```coordinator```, multiple 
 So far, it is able to solve easy task, such as fetch weather information and give travel advice or suggestion, fetch job market information and give the advice, feel free to check the detailed chats in [chats/hox](chats/hox).
 
 <div align="center">
-    <table>
-        <tr align="center">
-            <td style="text-align: center; vertical-align: middle;">
-                <img src="assets/hox.png" alt="workflow" height="250">
-            </td>
-            <td style="text-align: center; vertical-align: middle;">
-                <video src="assets/hox_weather_demo_2x5.mov" controls width="400" height="250">
-                </video>
-            </td>
-        </tr>
-        <tr align="center">
-            <td>Workflow of <b>HOX</b></td>
-            <td>Demo of <b>HOX</b> on Weather task with Gemini-2.5 flash as LLM (2.5x speed)</td>
-        </tr>
-    </table>
+
+| <img src="assets/hox.png" alt="workflow" height="250"> | [<img src="assets/hox_weather_demo.png" alt="workflow" height="250">](https://drive.google.com/file/d/1q9NZFwEyvUl1iaRKfA5AddmZUarxzXgU/view?usp=sharing) |
+| :---: | :---: |
+| Workflow of **HOX** | Demo of **HOX** on Weather task with Gemini-2.5 flash as LLM (2.5x speed) |
+
 </div>
 
 **⚠️** This project is under active development. APIs and architecture may change frequently.
