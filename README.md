@@ -38,14 +38,13 @@ So far, it is able to solve easy task, such as fetch weather information and giv
                 <img src="assets/hox.png" alt="workflow" height="250">
             </td>
             <td style="text-align: center; vertical-align: middle;">
-                <video src="assets/hox_weather_demo_2x.mov" controls width="400" height="250">
-                Your browser does not support the video tag.
+                <video src="assets/hox_weather_demo_2x5.mov" controls width="400" height="250">
                 </video>
             </td>
         </tr>
         <tr align="center">
             <td>Workflow of <b>HOX</b></td>
-            <td>Demo of <b>HOX</b> on Weather task with Gemini-2.5 flash as LLM</td>
+            <td>Demo of <b>HOX</b> on Weather task with Gemini-2.5 flash as LLM (2.5x speed)</td>
         </tr>
     </table>
 </div>
