@@ -47,6 +47,65 @@ So far, it is able to solve easy task, such as fetch weather information and giv
 - **Cross-tool Output Verfication** to improve reliability
 - **Multi-Agent Coordination** -> Working on it
 - **Let the agent retrieve past messgae**
+- **FastAPI** to make it be backhand
+
+## 🦊 Financial Fox Workflow
+
+Here is the workflow of **Financial Fox** workflow, to generate an instant financial report for current stock market with the world news. Below is the visualization of its workflow, and you can find the [corresponding figure](analyzer/assets/fox.png). Besides that, you can also find the [**demo chat**](analyzer/chats/fox_demo_ctx.txt) after running ```python run_fox.py```.
+
+```
+                        ┌─────────────────────────┐
+                        │      User Request       │
+                        └────────────┬────────────┘
+                                     │
+                                     ▼
+                        ┌─────────────────────────┐
+                        │      Central Agent      │
+                        │ Determine next action   │
+                        └────────────┬────────────┘
+                                     │
+                   ┌─────────────────┼──────────────────┐
+                   │                 │                  │
+                   ▼                 ▼                  ▼
+             News Agent      Stock Analyst      Report Formatter
+                   │                 │                  │
+                   └─────────────────┴──────────────────┘
+                                     │
+                                     ▼
+                          ┌─────────────────────┐
+                          │   Validator Agent   │
+                          └─────────┬───────────┘
+                                    │
+                    ┌───────────────┴───────────────┐
+                    │                               │
+                  Valid                           Invalid
+                    │                               │
+                    ▼                               ▼
+            Store Artifact                  Store Feedback
+            in Memory                       (or retry reason)
+                    │                               │
+                    └───────────────┬───────────────┘
+                                    ▼
+                             Central Agent
+                                    │
+                          Decide next step
+                                    │
+                     ┌──────────────┴──────────────┐
+                     │                             │
+                 Call another agent             END
+                     │                             │
+                     └──────────────┬──────────────┘
+                                    ▼
+                          Return Final Report
+```
+
+| Agent               | Responsibility                                                      |
+| ------------------- | ------------------------------------------------------------------- |
+| Central Agent       | Cordinate thw workfloow, Choose sub-agent and Assign it task        |
+| News Agent          | Extract events, companies, sectors                                  |
+| Stock Analyst       | Prices, ratios, indicators (non-LLM if possible)                    |
+| Report Formatter    | Format and generate the final report                                |
+| Validator Agent     | Validate whether the sub-agent accomplishs the assigned task or not |
 
 # 🎯 Purpose
 

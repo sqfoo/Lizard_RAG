@@ -17,33 +17,34 @@ os.environ['GLOG_minloglevel'] = '2'
 
 from core.llm import *
 from core.agent import Agent
-from core.hox import Hox
+from core.finance import Fox
+from core.finance import FINANCIAL_CENTRAL_TEMPLATE, NEWS_HELPER_TEMPLATE, STOCK_HELPER_TEMPLATE, VALIDATE_TEMPLATE, REPORT_FORMATTER_TEMPLATE
+
+EMPTY_PROMPT = ""
+
 from core.tools import *
-from core.database import database
-from core.templates import CENTRAL_TEMPLATE, VALIDATE_TEMPLATE
-from core.prompts import FINANCIAL_COORDINATOR_PROMPT, FINANCIAL_VALIDATOR_PROMPT, ANALYST_PROMPT, NEWS_PROMPT
 
 central_agent = Agent(
-    primary_LLM=GEMINI,
+    primary_LLM=HUGGINGFACE,
     backup_LLM=HUGGINGFACE,
-    tools=[duckduck_websearch,],
-    sys_prompt=FINANCIAL_COORDINATOR_PROMPT
+    tools=[duckduck_websearch, fetch_existing_data],
+    sys_prompt=EMPTY_PROMPT,
+    name="Centroid"
 )
 
 validate_agent = Agent(
-    primary_LLM=GEMINI,
+    primary_LLM=HUGGINGFACE,
     backup_LLM=HUGGINGFACE,
     tools=[duckduck_websearch, fetch_existing_data],
-    sys_prompt=FINANCIAL_VALIDATOR_PROMPT
+    sys_prompt=EMPTY_PROMPT,
+    name="Validator"
 )
 
 helpers = {
-    'Financial Analyst': Agent(
+    'brief-stock': Agent(
         primary_LLM=GEMINI,
         backup_LLM=HUGGINGFACE,
         tools=[
-            duckduck_websearch,
-            visit_webpage,
             get_historical_prices,
             get_company_fundamentals,
             get_financial_statements,
@@ -51,41 +52,55 @@ helpers = {
             run_technical_analysis,
             upload_new_source,
             fetch_existing_data,
-            stock_news,
         ],
-        sys_prompt=ANALYST_PROMPT
+        sys_prompt=EMPTY_PROMPT,
+        name="Stock Helper"
     ),
-    'News Seeker': Agent(
-        primary_LLM=GEMINI,
+    'news': Agent(
+        primary_LLM=HUGGINGFACE,
         backup_LLM=HUGGINGFACE,
         tools=[
             duckduck_websearch,
             visit_webpage,
             get_market_indices,
-            # fetch_news,
             upload_new_source,
             fetch_existing_data,
         ],
-        sys_prompt=NEWS_PROMPT
+        sys_prompt=EMPTY_PROMPT,
+        name="News Seeker"
     ),
+    'report': Agent(
+        primary_LLM=GEMINI,
+        backup_LLM=HUGGINGFACE,
+        tools=[
+            duckduck_websearch,
+            fetch_existing_data
+        ],
+        sys_prompt=EMPTY_PROMPT,
+        name="Report Formatter"
+    )
 }
 
-hox = Hox(
+helper_templates = {
+    'brief-stock': STOCK_HELPER_TEMPLATE,
+    'news': NEWS_HELPER_TEMPLATE,
+    'report': REPORT_FORMATTER_TEMPLATE
+}
+
+fox = Fox(
     central_agent=central_agent,
     helper_agents=helpers,
     validate_agent=validate_agent,
-    central_template=CENTRAL_TEMPLATE,
-    validate_template=VALIDATE_TEMPLATE
+    central_template=FINANCIAL_CENTRAL_TEMPLATE,
+    validate_template=VALIDATE_TEMPLATE,
+    helper_template=helper_templates
 )
-hox.visualize()
 
-keep = True
+fox.visualize()
 
 human_msg = "Based on today's news, suggest what stocks to track and why"
-resp = hox(human_msg)
+resp = fox(human_msg)
 print(f'Agent Response: {resp}')
 print('-'*20)
 
-hox.save_chat('chats')
-
-database.save()
+fox.save_chat('chats')

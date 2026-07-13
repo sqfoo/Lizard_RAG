@@ -1,5 +1,6 @@
 import time
 import uuid
+from abc import ABC
 from typing import TypedDict, Annotated, Optional, Literal, List
 
 from langgraph.graph import END, StateGraph, START
@@ -15,7 +16,6 @@ from core.utils import FallbackLoggingHandler
 MAX_RETRIES = 5
 BASE_WAIT = 10
 
-
 # =========================
 # STATE
 # =========================
@@ -27,7 +27,7 @@ class AgentState(TypedDict):
 # =========================
 # AGENT
 # =========================
-class Agent:
+class Agent(ABC):
     def __init__(
         self,
         primary_LLM: dict,
@@ -57,7 +57,7 @@ class Agent:
         self.extract = extract
         self.name = name
 
-        print('Building the agent ... ...')
+        print(f"Building the agent named {name} ... ... ")
         self.graph = self._build_graph()
         self.thread_id = str(uuid.uuid4())
 
@@ -155,10 +155,10 @@ class Agent:
     # =========================
     # VISUALIZE
     # =========================
-    def visualize(self):
-        print('Visualise the agent workflow and saved it in workflow.png')
+    def visualize(self, filepath='workflow.png'):
+        print(f'Visualise the agent workflow and saved it in {filepath}')
         self.graph.get_graph().draw_mermaid_png(
-            output_file_path="workflow.png"
+            output_file_path=filepath
         )
 
     # =========================

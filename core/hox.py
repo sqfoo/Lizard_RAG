@@ -3,6 +3,7 @@ import uuid
 import time
 import re
 import random
+from abc import ABC
 from datetime import datetime
 from typing import TypedDict, Literal, Annotated, List
 
@@ -35,7 +36,7 @@ class HoxState(TypedDict):
 MAX_RETRIES = 5
 BASE_WAIT = 10
 
-class Hox:
+class Hox(ABC):
     def __init__(
         self,
         central_agent: Agent,
@@ -263,10 +264,10 @@ class Hox:
     # =========================
     # VISUALIZE
     # =========================
-    def visualize(self):
-        print('Visualise the agent workflow and saved it in workflow.png')
+    def visualize(self, filepath='hox.png'):
+        print(f'Visualise the agent workflow and saved it in {filepath}')
         self.graph.get_graph().draw_mermaid_png(
-            output_file_path="hox.png"
+            output_file_path=filepath
         )
 
     def get_hox_chat_history(self):

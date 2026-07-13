@@ -1,51 +1,53 @@
-import json
-import uuid 
-import time
 import re
+import uuid
+import json
+import time
 import random
 from datetime import datetime
-from typing import TypedDict, Literal, Annotated
+from typing import TypedDict, Literal, Annotated, List, Dict, Any
 
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 
 from core.agent import Agent
 
-
 # ============================================================
 # STATE
 # ============================================================
 
-class FoxState(TypedDict):
-    # User
-    user_request: str
+class ValidationOutput(TypedDict):
+    valid: bool
+    reason: str
 
-    # Workflow
+
+class AgentArtifact(TypedDict):
+    agent: str
+    type: str
+    data: Any
+    validation: ValidationOutput | None
+    iteration: int
+
+class FinalReport(TypedDict):
+    title: str
+    content: str
+
+class WorkflowState(TypedDict):
+    user_request: str
     current_task: str
     next_node: str
     iteration: int
+    final_report: FinalReport
 
-    # Latest execution
-    helper_output: str
-    validation_output: str
-
-    # Persistent outputs
-    news_output: str
-    stock_output: str
-
-    # Final result
-    final_answer: str
-
-    # Logs
-    history: Annotated[list[str], list.__add__]
+class FoxState(TypedDict):
+    workflow: WorkflowState
+    memory: Dict[str, List[AgentArtifact]]
+    history: List[str]
 
 
 # ============================================================
-# MULTI AGENT SYSTEM
+# FOX ENGINE
 # ============================================================
 
-# Settings for Exponential Retry
-MAX_RETRIES = 5
 BASE_WAIT = 10
 
 class Fox:
@@ -55,259 +57,272 @@ class Fox:
         helper_agents: dict[str, Agent],
         validate_agent: Agent,
         central_template: str,
+        helper_template: dict,
         validate_template: str,
-        helper_template: str
+        max_iterations: int = 10,
     ):
-
         self.central = central_agent
         self.helpers = helper_agents
         self.validator = validate_agent
 
         self.central_template = central_template
-        self.validate_template = validate_template
         self.helper_template = helper_template
+        self.validate_template = validate_template
 
-        print('Building Hox System ... ...')
+        self.max_iterations = max_iterations
+
         self.graph = self._build_graph()
         self.history = []
-        self.set_thread(str(uuid.uuid4()))
+        self.thread_id = str(uuid.uuid4())
 
-
+    # --------------------------------------------------------
+    # GRAPH
     # --------------------------------------------------------
 
     def _build_graph(self):
-        builder = StateGraph(FoxState)
-        
-        builder.add_node("central", self.central_node)
-        builder.add_node("helper", self.helper_node)
-        builder.add_node("validate", self.validate_node)
+        graph = StateGraph(FoxState)
 
-        builder.add_edge(START, "central")
-        builder.add_conditional_edges(
+        graph.add_node("central", self.central_node)
+        graph.add_node("helper", self.helper_node)
+        graph.add_node("validate", self.validate_node)
+
+        graph.add_edge(START, "central")
+
+        graph.add_conditional_edges(
             "central",
-            self.route_from_central,
-            {
-                "helper": "helper",
-                "end": END,
-            },
+            self.route,
+            {"helper": "helper", "end": END},
         )
 
-        builder.add_edge("helper", "validate")
-        builder.add_edge("validate", "central")
+        graph.add_edge("helper", "validate")
+        graph.add_edge("validate", "central")
 
-        return builder.compile(checkpointer=MemorySaver())
+        return graph.compile(checkpointer=MemorySaver())
 
-    # ========================================================
+    # --------------------------------------------------------
     # CENTRAL
-    # ========================================================
+    # --------------------------------------------------------
 
     def central_node(self, state: FoxState):
-        
+        memory = state["memory"]
+        workflow = state["workflow"]
+
         prompt = self.central_template.format(
-            user_request=state["user_request"],
-            history=state["history"],
-            helper_output=state["helper_output"],
-            validation_output=state["validation_output"],
-            helpers=str(list(self.helpers.keys())),
-            news=state.get('news_output', ""),
-            stock_analysis=state.get('stock_output', "")
+            user_request=workflow["user_request"],
+            memory=json.dumps(memory, indent=2),
+            history="\n".join(state["history"][-5:]),
+            last_called=workflow.get("next_node", "")
         )
 
         response = self.central(prompt)
+
         print(f"Central Node's Response: {response}")
-        history = state["history"] + [response]
+        result = self._parse_json(response)
 
-        self.history.append(
-            {
-                'role': 'central',
-                'timestamp': datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
-                'response': response
-            }
+        next_node = result.get("NEXT", "END")
+        task = result.get("TASK", "")
+        answer = result.get("final_report", {}) or workflow.get("final_report", {}) # Need to fix this
+        workflow["iteration"] += 1
+
+        state["history"].append(response)
+        self.add_msg(
+            'central',
+            datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
+            response
         )
-        match = re.search(r"```(?:json)?\s*(.*?)\s*```", response, re.DOTALL)
 
-        if match:
-            resp = json.loads(match.group(1))
-        else:
-            resp = json.loads(response)
+        if next_node.upper() == "END":
+            workflow["final_report"] = answer
+            workflow["next_node"] = "end"
 
-        next = resp.get('NEXT', 'END')
-
-        # End the Agent Call
-        if next.upper()=='END':
-            print(f'End of the Agent Workflow')
-            answer = resp['ANSWER']
             return {
-                "history": history,
-                "next_node": "end",
-                "final_answer": answer,
+                "workflow": workflow,
+                "history": state["history"],
+                "final_report": answer
             }
 
-        # Direct to Helper
-        helper = next if next in self.helpers.keys() else 'END'
-        task = resp.get('TASK', '')
+        workflow["next_node"] = next_node
+        workflow["current_task"] = task
 
-        if helper == 'END':
-            print(f'Failed to call a valid helper, so would end the process and run {task}')
-        else:
-            print(f'Call {helper} to run {task} ... ')
-        
         time.sleep(BASE_WAIT * random.uniform(0, 1.0))
         return {
-            "history": history,
-
-            "next_node": helper,
-            "current_task": task,
-            "iteration": state.get('iteration', 0) + 1,
-
-            "news_output": state.get('news_output', ""),
-            "stock_output": state.get('stock_output', ""),
+            "workflow": workflow,
+            "history": state["history"],
         }
 
-    # ========================================================
+    # --------------------------------------------------------
     # HELPER
-    # ========================================================
-
+    # --------------------------------------------------------
     def helper_node(self, state: FoxState):
 
-        helper_name = state["next_node"]
+        workflow = state["workflow"]
+        helper_name = workflow["next_node"].lower()
         helper = self.helpers[helper_name]
 
-        prompt = self.helper_template(
-            news=state.get('news_output', ''),
-            stock_analysis=state.get("stock_output", ""),
-            current_task=state['current_task']
+        if "report" in helper_name:
+            prompt = self.helper_template[helper_name].format(
+                memory=json.dumps(state["memory"], indent=2),
+                current_task=workflow["current_task"],
+                history='\n'.join(state['history'])
+            )
+        else:
+            prompt = self.helper_template[helper_name].format(
+                memory=json.dumps(state["memory"], indent=2),
+                current_task=workflow["current_task"]
+            )
+
+        raw = helper(prompt)
+
+        print(f"Helper-{helper_name}'s response: {raw}")
+        self.add_msg(
+            f'Helper-{helper_name}',
+            datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
+            raw
         )
-        result = helper(prompt)
-        print(f"Helper's response: {result}")
-        
-        self.history.append(
-            {
-                'role': f'Helper-{helper_name}',
-                'timestamp': datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
-                'response': result
+        result = self._parse_json(raw)
+
+        if 'stock' in helper_name:
+            print(f'Reducing the memory context for executive purpose with Helper-{helper_name} ... ...')
+            stocks = result["data"].get("stocks", [])
+            ctx = [
+                {
+                    "stock": s,
+                    "executive_summary": s["executive_summary"],
+                }
+                for s in stocks
+            ]
+            result = {
+                'type': helper_name,
+                'data': ctx
             }
+
+
+        artifact = AgentArtifact(
+            agent=helper_name,
+            type=result.get("type", "unknown"),
+            data=result.get("data", result),
+            validation=None,
+            iteration=workflow["iteration"],
         )
+
+        memory = state["memory"]
+        memory.setdefault(helper_name, []).append(artifact)
+
+        state["history"].append(raw)
+        workflow["final_report"] = result.get("data", {}) if "report" in helper_name else workflow["final_report"]
 
         time.sleep(BASE_WAIT * random.uniform(0, 1.0))
         return {
-            "helper_output": result,
-
-            "history": state["history"] + [
-                f"{helper_name}: {result}"
-            ],
-            "iteration": state.get('iteration', 0),
-            
-            "news_output": result if 'NEWS' in helper_name.upper() else state.get("news_output", ""),
-            "stock_output": result if 'ANALYSIS' in helper_name.upper() else state.get("stock_output", ""),
-
+            "memory": memory,
+            "history": state["history"],
+            "workflow": workflow
         }
 
-    # ========================================================
+    # --------------------------------------------------------
     # VALIDATOR
-    # ========================================================
+    # --------------------------------------------------------
 
     def validate_node(self, state: FoxState):
-        msg = self.validate_template.format(
-            current_task=state['current_task'],
-            helper_output=state['helper_output']
+
+        workflow = state["workflow"]
+        memory = state["memory"]
+
+        last_agent = workflow["next_node"]
+        latest = memory[last_agent][-1]
+
+        prompt = self.validate_template.format(
+            task=workflow["current_task"],
+            output=json.dumps(latest["data"])
         )
 
-        validation = self.validator(msg)
-        print(f"Validation's Result: {validation}")
-        self.history.append(
-            {
-                'role': 'Validator',
-                'timestamp': datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
-                'response': validation
-            }
+        raw = self.validator(prompt)
+        self.add_msg(
+            'Validator',
+            datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
+            raw
         )
-        
+
+        result = self._parse_json(raw)
+
+        latest["validation"] = result
+        print(f"Validator Node's Response: {result.get("valid", "false")} because {result.get("reason", "Failed to give")}")
+
+
+        state["history"].append(raw)
+
         time.sleep(BASE_WAIT * random.uniform(0, 1.0))
         return {
-            "validation_output": validation.upper(),
-            "history": state["history"] + [
-                f"Validation: {validation}"
-            ],
-            "iteration": state.get('iteration', 0),
-            "news_output": state.get('news_output', ""),
-            "stock_output": state.get('stock_output', ""),
+            "memory": memory,
+            "history": state["history"],
         }
 
-    # ========================================================
-    # ROUTER
-    # ========================================================
+    # --------------------------------------------------------
+    # ROUTING
+    # --------------------------------------------------------
 
-    def route_from_central(self, state: FoxState) -> Literal["helper", "end"]:
-        if state["next_node"] == "end" or state["iteration"] >= 5:
+    def route(self, state: FoxState) -> Literal["helper", "end"]:
+
+        if state["workflow"]["iteration"] >= self.max_iterations:
             return "end"
+
+        if state["workflow"].get("next_node") == "end":
+            return "end"
+
         return "helper"
 
-    # ========================================================
-    # RUN
-    # ========================================================
+    # --------------------------------------------------------
+    # JSON PARSER
+    # --------------------------------------------------------
 
-    def __call__(self, user_request: str):
-        payload = {
-            "user_request": user_request,
+    def _parse_json(self, text: str) -> dict:
+        try:
+            match = re.search(r"\{.*\}", text, re.DOTALL)
+            if match:
+                return json.loads(match.group())
+            return json.loads(text)
+        except Exception as e:
+            print(f'Failed to convert text into JSON format, {str(e)}')
+            return {}
+
+    # --------------------------------------------------------
+    # RUN
+    # --------------------------------------------------------
+
+    def __call__(self, user_request: str) -> dict:
+
+        state: FoxState = {
+            "workflow": {
+                "user_request": user_request,
+                "current_task": "",
+                "next_node": "",
+                "iteration": 0,
+                "final_report": {},
+            },
+            "memory": {},
             "history": [],
-            "helper_output": "",
-            "validation_output": "",
-            "current_task": "",
-            "next_node": "",
-            "final_answer": "",
         }
 
-        self.history.append(
-            {
-                'role': 'Human',
-                'timestamp': datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),
-                'response': user_request
-            }
+        result = self.graph.invoke(
+            state,
+            config={"configurable": {"thread_id": self.thread_id}},
         )
 
-        for attempt in range(MAX_RETRIES):
-            try:
-                # Invoke the graph
-                result = self.graph.invoke(
-                    payload,
-                    config={"configurable": {"thread_id": self.thread_id}},
-                )
-                return result.get("final_answer", "Failed to answer")
-            
-            except Exception as e:
-                # Exponential backoff calculation: 2s, 4s, 8s, 16s...
-                sleep_time = BASE_WAIT * (2 ** attempt) 
-                
-                if attempt < MAX_RETRIES - 1:
-                    print(f"Error: {str(e)}")
-                    print(f"Attempt {attempt + 1} failed. Retrying in {sleep_time} seconds...")
-                    time.sleep(sleep_time)
-                else:
-                    return f"Error processing query after {MAX_RETRIES} attempts: {str(e)}"
-
-    def set_thread(self, thread_id):
-        self.thread_id = thread_id
-        self.central.set_thread(thread_id)
-        self.validator.set_thread(thread_id)
-        for helper in self.helpers.values():
-            helper.set_thread(thread_id)
-
-
+        return result["workflow"].get("final_report", {})
+    
     # =========================
     # VISUALIZE
     # =========================
     def visualize(self):
-        print('Visualise the agent workflow and saved it in workflow.png')
+        print('Visualise the agent workflow and saved it in fox.png')
         self.graph.get_graph().draw_mermaid_png(
-            output_file_path="hox.png"
+            output_file_path="fox.png"
         )
 
-    def get_hox_chat_history(self):
+    def get_fox_chat_history(self):
         return self.history
     
     def save_chat(self, dir: str):
-        with open(f'{dir}/hox_{self.thread_id}.txt', 'a') as f:
+        with open(f'{dir}/fox_{self.thread_id}.txt', 'a') as f:
             # 1. Get the current epoch timestamp (float)
             timestamp = time.time()
 
@@ -321,4 +336,14 @@ class Fox:
                 f.write(f'\n======= {role} Message =======\n')
                 f.write(f'Timestamp: {action_time}\n')
                 f.write(f'Response: {resp}\n')
-        print(f'Save all chats in {dir}/hox_{self.thread_id}.txt')
+        print(f'Save all chats in {dir}/fox_{self.thread_id}.txt')
+
+    def add_msg(self, role, timestamp, msg):
+        self.history.append(
+            {
+                'role': role,
+                'timestamp': timestamp,
+                'response': msg
+            }
+        )
+        print(f'Saved the response from {role}')

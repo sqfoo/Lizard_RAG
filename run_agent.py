@@ -19,7 +19,7 @@ from core.agent import Agent
 from core.tools import *
 from core.database import database
 from core.prompts import GENERAL_PROMPT
-from core.llm import GEMINI, GEMINI_LITE, HUGGINGFACE, HUGGINGFACE_LITE
+from core.llm import GEMINI, HUGGINGFACE
 
 TOOLBOX = [
     duckduck_websearch,
@@ -35,7 +35,7 @@ TOOLBOX = [
     fetch_existing_data
 ]
 
-agent = Agent(primary_LLM=GEMINI_LITE, backup_LLM=HUGGINGFACE_LITE, tools=TOOLBOX, sys_prompt=GENERAL_PROMPT, keywords=["FINAL ANSWER"], extract=True)
+agent = Agent(primary_LLM=HUGGINGFACE, backup_LLM=GEMINI, tools=TOOLBOX, sys_prompt=GENERAL_PROMPT, keywords=["FINAL ANSWER"], extract=True)
 agent.visualize()
 
 keep = True

@@ -390,7 +390,19 @@ def get_historical_prices(
 @tool
 def get_company_fundamentals(symbol: str) -> Dict:
     """
-    Retrieve the company's fundamental metrics.
+    Use this tool when evaluating a company's long-term financial health.
+
+    Returns metrics such as:
+    - PE ratio
+    - Price-to-book
+    - ROE
+    - Profit margin
+    - Revenue growth
+    - Earnings growth
+    - Debt-to-equity
+    - Dividend yield
+
+    This tool is generally useful for long-term investment analysis rather than short-term trading.
     """
 
     info = yf.Ticker(symbol).info
